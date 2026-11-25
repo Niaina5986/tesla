@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "last_analysis": "2026-11-25T10:04:23.206483+00:00",
-  "last_successful_analysis": "2026-11-25T10:04:23.206495+00:00",
+  "last_analysis": "2026-11-25T19:56:05.752450+00:00",
+  "last_successful_analysis": "2026-11-25T19:56:05.752465+00:00",
   "tickets": {
     "4290cb6a0351fcf7": {
       "mode": "COMBINÉ",
@@ -102,14 +102,76 @@
       "status": "pending",
       "created_at": "2026-11-25T10:04:22.624202+00:00",
       "message_sent": true
+    },
+    "085f248f664b569f": {
+      "mode": "COMBINÉ",
+      "legs": [
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "7d634711ef483a1dd9f38dfaa54f6ac3",
+          "home": "Richmond Spiders",
+          "away": "Bethune-Cookman Wildcats",
+          "selection": "Richmond Spiders",
+          "odds": 1.12,
+          "market_probability": 0.84772,
+          "confidence": 95,
+          "bookmakers": 9,
+          "start": "2026-11-25T23:00:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "e6d087efc768954eaa920f1d884ddfb7",
+          "home": "Grand Canyon Antelopes",
+          "away": "Colorado Buffaloes",
+          "selection": "Grand Canyon Antelopes",
+          "odds": 1.19,
+          "market_probability": 0.79521,
+          "confidence": 95,
+          "bookmakers": 9,
+          "start": "2026-11-26T02:30:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "3ce2ec8471b46e17dc7b246a086a3e8d",
+          "home": "Oregon Ducks",
+          "away": "Texas Tech Red Raiders",
+          "selection": "Texas Tech Red Raiders",
+          "odds": 1.19,
+          "market_probability": 0.79113,
+          "confidence": 95,
+          "bookmakers": 5,
+          "start": "2026-11-27T04:30:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "958410c2d9ff2a33dac7eef047ddb857",
+          "home": "Northern Kentucky Norse",
+          "away": "Bellarmine Knights",
+          "selection": "Northern Kentucky Norse",
+          "odds": 1.31,
+          "market_probability": 0.72665,
+          "confidence": 94,
+          "bookmakers": 9,
+          "start": "2026-11-26T00:00:00Z"
+        }
+      ],
+      "odds": 2.08,
+      "confidence": 95,
+      "status": "pending",
+      "created_at": "2026-11-25T19:56:05.151731+00:00",
+      "message_sent": true
     }
   },
   "reported_results": [],
   "statistics": {
-    "analyses": 2,
-    "signals": 2,
+    "analyses": 3,
+    "signals": 3,
     "won": 0,
     "lost": 0,
-    "pending": 2
+    "pending": 3
   }
 }
