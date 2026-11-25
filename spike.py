@@ -1,46 +1,50 @@
 import os
 import json
 import time
+import random
 import itertools
 import statistics
 import urllib.request
 import urllib.parse
+
 from datetime import datetime, timezone
 
 import websocket
 
 
 # =====================================================
-# BOOM1000 SPIKE INTELLIGENCE V2
-# DERIV API + STATISTICAL RESEARCH + TELEGRAM
+# BOOM1000 SPIKE INTELLIGENCE V3
 # =====================================================
 
-SYMBOL = "BOOM1000"
+PROJECT = "BOOM1000 SPIKE INTELLIGENCE V3"
 
 APP_ID = os.getenv("DERIV_APP_ID", "1089")
-
-WS_URL = (
-    f"wss://ws.derivws.com/websockets/v3"
-    f"?app_id={APP_ID}"
-)
 
 DB_FILE = "dataset.json"
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT = os.getenv("TELEGRAM_CHAT_ID")
 
+SYMBOL_NAME = "BOOM 1000"
+
 CANDLE_COUNT = 1000
 TICK_COUNT = 2000
+
+MAX_STRATEGIES = 600
+
+HORIZON = 3
+
+SPIKE_MULTIPLIER = 2.0
 
 TIMEFRAMES = {
     "M1": 60,
     "M3": 180
 }
 
-SPIKE_ATR_MULTIPLIER = 2.0
-PREDICTION_HORIZON = 3
-
-MAX_STRATEGIES = 600
+WS_ENDPOINTS = [
+    f"wss://ws.derivws.com/websockets/v3?app_id={APP_ID}",
+    f"wss://ws.binaryws.com/websockets/v3?app_id={APP_ID}"
+]
 
 
 # =====================================================
@@ -52,20 +56,24 @@ def load_db():
     if os.path.exists(DB_FILE):
 
         try:
-            with open(DB_FILE, "r") as f:
-                return json.load(f)
 
-        except Exception:
-            pass
+            with open(DB_FILE, "r") as f:
+                db = json.load(f)
+
+            return db
+
+        except Exception as e:
+
+            print("Database recovery:", e)
 
     return {
-        "project": "BOOM1000 SPIKE INTELLIGENCE",
+        "project": PROJECT,
         "created": datetime.now(timezone.utc).isoformat(),
         "ticks": [],
         "candles": {},
+        "signals": [],
         "analyses": [],
         "best_strategies": {},
-        "signals": [],
         "statistics": {
             "runs": 0,
             "strategies_tested": 0
@@ -78,7 +86,13 @@ def save_db(db):
     temp = DB_FILE + ".tmp"
 
     with open(temp, "w") as f:
-        json.dump(db, f, indent=2)
+
+        json.dump(
+            db,
+            f,
+            indent=2,
+            allow_nan=False
+        )
 
     os.replace(temp, DB_FILE)
 
@@ -90,8 +104,9 @@ def save_db(db):
 def telegram(message):
 
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT:
+
         print("Telegram non configure")
-        return
+        return False
 
     url = (
         f"https://api.telegram.org/"
@@ -99,26 +114,107 @@ def telegram(message):
     )
 
     data = urllib.parse.urlencode({
+
         "chat_id": TELEGRAM_CHAT,
         "text": message,
-        "parse_mode": "HTML"
+        "parse_mode": "HTML",
+        "disable_web_page_preview": "true"
+
     }).encode()
 
     try:
 
-        req = urllib.request.Request(url, data=data)
+        req = urllib.request.Request(
+            url,
+            data=data
+        )
 
-        urllib.request.urlopen(req, timeout=20)
+        with urllib.request.urlopen(
+            req,
+            timeout=25
+        ) as response:
 
-        print("Telegram: message envoye")
+            result = json.loads(
+                response.read().decode()
+            )
+
+            return result.get("ok", False)
 
     except Exception as e:
 
         print("Telegram error:", e)
+        return False
 
 
 # =====================================================
-# DERIV API
+# DERIV CONNECTION
+# =====================================================
+
+def connect_deriv():
+
+    last_error = None
+
+    for attempt in range(1, 8):
+
+        for endpoint in WS_ENDPOINTS:
+
+            try:
+
+                print(
+                    f"DERIV CONNECTION "
+                    f"{attempt}/7"
+                )
+
+                print("Endpoint:", endpoint.split("?")[0])
+
+                ws = websocket.create_connection(
+
+                    endpoint,
+
+                    timeout=25,
+
+                    enable_multithread=True,
+
+                    suppress_origin=True,
+
+                    http_proxy_host=None
+
+                )
+
+                ws.settimeout(40)
+
+                print("DERIV CONNECTED")
+
+                return ws
+
+            except Exception as e:
+
+                last_error = e
+
+                print("Connection error:", str(e))
+
+        if attempt < 7:
+
+            delay = min(
+                5 * (2 ** (attempt - 1)),
+                90
+            )
+
+            delay += random.uniform(1, 5)
+
+            print(
+                f"Retry in {delay:.1f} seconds"
+            )
+
+            time.sleep(delay)
+
+    raise Exception(
+        f"DERIV CONNECTION FAILED: {last_error}"
+    )
+
+
+# =====================================================
+# DERIV REQUEST
 # =====================================================
 
 def deriv_request(ws, request, req_id):
@@ -127,63 +223,93 @@ def deriv_request(ws, request, req_id):
 
     ws.send(json.dumps(request))
 
-    while True:
+    deadline = time.time() + 45
+
+    while time.time() < deadline:
 
         response = json.loads(ws.recv())
 
-        if response.get("req_id") == req_id:
+        if response.get("req_id") != req_id:
+            continue
 
-            if "error" in response:
-                raise Exception(
-                    response["error"].get("message", "Deriv error")
+        if "error" in response:
+
+            raise Exception(
+                response["error"].get(
+                    "message",
+                    "Deriv API error"
                 )
+            )
 
-            return response
+        return response
 
-
-def connect_deriv():
-
-    ws = websocket.create_connection(
-        WS_URL,
-        timeout=30
+    raise TimeoutError(
+        f"Deriv request timeout: {req_id}"
     )
 
-    print("Connexion Deriv OK")
 
-    return ws
-
+# =====================================================
+# FIND BOOM1000 SYMBOL
+# =====================================================
 
 def get_active_symbols(ws):
 
     response = deriv_request(
+
         ws,
-        {"active_symbols": "brief"},
-        1
+
+        {
+            "active_symbols": "brief"
+        },
+
+        101
+
     )
 
-    symbols = response.get("active_symbols", [])
+    symbols = response.get(
+        "active_symbols",
+        []
+    )
 
     for item in symbols:
 
-        symbol = item.get("symbol", "")
+        name = item.get(
+            "display_name",
+            ""
+        ).upper()
 
-        name = item.get("display_name", "").upper()
+        symbol = item.get(
+            "symbol",
+            ""
+        ).upper()
 
-        if "BOOM 1000" in name or symbol == SYMBOL:
+        if (
+            "BOOM 1000" in name
+            or "BOOM1000" in symbol
+        ):
 
-            print("Symbole trouve:", symbol)
+            print(
+                "BOOM1000 SYMBOL:",
+                item["symbol"]
+            )
 
-            return symbol
+            return item["symbol"]
 
     raise Exception(
-        "BOOM1000 introuvable dans active_symbols"
+        "BOOM1000 not found in Deriv active symbols"
     )
 
+
+# =====================================================
+# CANDLES
+# =====================================================
 
 def get_candles(ws, symbol, granularity):
 
     response = deriv_request(
+
         ws,
+
         {
             "ticks_history": symbol,
             "end": "latest",
@@ -191,50 +317,87 @@ def get_candles(ws, symbol, granularity):
             "style": "candles",
             "granularity": granularity
         },
-        10 + granularity
+
+        200 + granularity
+
     )
 
-    candles = response.get("candles", [])
+    candles = []
 
-    result = []
+    for c in response.get("candles", []):
 
-    for c in candles:
+        candles.append({
 
-        result.append({
             "time": int(c["epoch"]),
+
             "open": float(c["open"]),
+
             "high": float(c["high"]),
+
             "low": float(c["low"]),
+
             "close": float(c["close"])
+
         })
 
-    return sorted(result, key=lambda x: x["time"])
+    candles.sort(
+        key=lambda x: x["time"]
+    )
 
+    # Exclude the most recent candle because it may
+    # still be forming. Never use an incomplete candle.
+
+    if len(candles) > 1:
+        candles = candles[:-1]
+
+    return candles
+
+
+# =====================================================
+# TICKS
+# =====================================================
 
 def get_ticks(ws, symbol):
 
     response = deriv_request(
+
         ws,
+
         {
             "ticks_history": symbol,
             "end": "latest",
             "count": TICK_COUNT,
             "style": "ticks"
         },
-        20
+
+        301
+
     )
 
-    history = response.get("history", {})
+    history = response.get(
+        "history",
+        {}
+    )
 
-    prices = history.get("prices", [])
-    times = history.get("times", [])
+    prices = history.get(
+        "prices",
+        []
+    )
+
+    times = history.get(
+        "times",
+        []
+    )
 
     return [
+
         {
             "time": int(t),
             "price": float(p)
         }
+
         for t, p in zip(times, prices)
+
     ]
 
 
@@ -262,11 +425,13 @@ def ema(values, period):
     if len(values) < period:
         return result
 
-    multiplier = 2 / (period + 1)
-
-    current = statistics.mean(values[:period])
+    current = statistics.mean(
+        values[:period]
+    )
 
     result[period-1] = current
+
+    multiplier = 2 / (period + 1)
 
     for i in range(period, len(values)):
 
@@ -287,27 +452,40 @@ def rsi(values, period=14):
     if len(values) <= period:
         return result
 
-    gains = []
-    losses = []
+    changes = [
 
-    for i in range(1, len(values)):
+        values[i] - values[i-1]
 
-        change = values[i] - values[i-1]
+        for i in range(1, len(values))
 
-        gains.append(max(change, 0))
-        losses.append(max(-change, 0))
+    ]
 
-    avg_gain = statistics.mean(gains[:period])
-    avg_loss = statistics.mean(losses[:period])
+    gains = [
+        max(x, 0)
+        for x in changes
+    ]
+
+    losses = [
+        max(-x, 0)
+        for x in changes
+    ]
+
+    avg_gain = statistics.mean(
+        gains[:period]
+    )
+
+    avg_loss = statistics.mean(
+        losses[:period]
+    )
 
     def calculate(g, l):
 
         if l == 0:
             return 100
 
-        rs = g / l
-
-        return 100 - (100 / (1 + rs))
+        return 100 - (
+            100 / (1 + g / l)
+        )
 
     result[period] = calculate(
         avg_gain,
@@ -317,13 +495,17 @@ def rsi(values, period=14):
     for i in range(period + 1, len(values)):
 
         avg_gain = (
+
             avg_gain * (period - 1)
             + gains[i-1]
+
         ) / period
 
         avg_loss = (
+
             avg_loss * (period - 1)
             + losses[i-1]
+
         ) / period
 
         result[i] = calculate(
@@ -336,32 +518,59 @@ def rsi(values, period=14):
 
 def stochastic(candles, k_period=14, d_period=3):
 
-    k_values = [None] * len(candles)
+    k = [None] * len(candles)
 
     for i in range(k_period - 1, len(candles)):
 
-        window = candles[i-k_period+1:i+1]
+        window = candles[
+            i-k_period+1:i+1
+        ]
 
-        highest = max(c["high"] for c in window)
-        lowest = min(c["low"] for c in window)
+        highest = max(
+            x["high"]
+            for x in window
+        )
+
+        lowest = min(
+            x["low"]
+            for x in window
+        )
 
         if highest == lowest:
-            k_values[i] = 50
+
+            k[i] = 50
 
         else:
-            k_values[i] = (
-                (candles[i]["close"] - lowest)
-                / (highest - lowest)
+
+            k[i] = (
+
+                (
+                    candles[i]["close"]
+                    - lowest
+                )
+
+                /
+
+                (highest - lowest)
+
             ) * 100
 
-    valid = [
-        x if x is not None else 0
-        for x in k_values
-    ]
+    d = [None] * len(candles)
 
-    d_values = sma(valid, d_period)
+    for i in range(len(candles)):
 
-    return k_values, d_values
+        if i < k_period + d_period - 2:
+            continue
+
+        window = k[
+            i-d_period+1:i+1
+        ]
+
+        if all(x is not None for x in window):
+
+            d[i] = statistics.mean(window)
+
+    return k, d
 
 
 def atr(candles, period=14):
@@ -370,13 +579,22 @@ def atr(candles, period=14):
 
     for i in range(1, len(candles)):
 
-        c = candles[i]
-        previous = candles[i-1]["close"]
+        current = candles[i]
+
+        previous_close = candles[i-1]["close"]
 
         tr.append(max(
-            c["high"] - c["low"],
-            abs(c["high"] - previous),
-            abs(c["low"] - previous)
+
+            current["high"] - current["low"],
+
+            abs(
+                current["high"] - previous_close
+            ),
+
+            abs(
+                current["low"] - previous_close
+            )
+
         ))
 
     return sma(tr, period)
@@ -387,16 +605,24 @@ def bollinger(values, period=20, deviation=2):
     middle = sma(values, period)
 
     upper = [None] * len(values)
+
     lower = [None] * len(values)
 
     for i in range(period - 1, len(values)):
 
-        window = values[i-period+1:i+1]
+        window = values[
+            i-period+1:i+1
+        ]
 
         std = statistics.pstdev(window)
 
-        upper[i] = middle[i] + deviation * std
-        lower[i] = middle[i] - deviation * std
+        upper[i] = (
+            middle[i] + deviation * std
+        )
+
+        lower[i] = (
+            middle[i] - deviation * std
+        )
 
     return upper, middle, lower
 
@@ -407,7 +633,7 @@ def bollinger(values, period=20, deviation=2):
 
 def detect_spike(candles, index, atr_values):
 
-    if index + PREDICTION_HORIZON >= len(candles):
+    if index + HORIZON >= len(candles):
         return None
 
     current_atr = atr_values[index]
@@ -418,132 +644,247 @@ def detect_spike(candles, index, atr_values):
     current_price = candles[index]["close"]
 
     future = candles[
-        index+1:
-        index+1+PREDICTION_HORIZON
+        index+1:index+1+HORIZON
     ]
 
-    highest = max(c["high"] for c in future)
+    highest = max(
+        x["high"]
+        for x in future
+    )
 
     rise = highest - current_price
 
     return rise >= (
-        current_atr * SPIKE_ATR_MULTIPLIER
+        current_atr * SPIKE_MULTIPLIER
     )
 
 
 # =====================================================
-# STRATEGY ENGINE
+# STRATEGY SIGNAL
 # =====================================================
 
 def strategy_signal(
-    candles,
-    index,
-    rsi_values,
-    k_values,
-    d_values,
-    fast_ema,
-    slow_ema,
+    i,
+    r,
+    k,
+    d,
+    fast,
+    slow,
     rsi_limit,
     stoch_limit
 ):
 
-    if index < 1:
+    if i < 1:
         return False
 
     required = [
-        rsi_values[index],
-        rsi_values[index-1],
-        k_values[index],
-        k_values[index-1],
-        d_values[index],
-        d_values[index-1],
-        fast_ema[index],
-        slow_ema[index]
+
+        r[i],
+        r[i-1],
+
+        k[i],
+        k[i-1],
+
+        d[i],
+        d[i-1],
+
+        fast[i],
+        slow[i]
+
     ]
 
-    if any(x is None for x in required):
+    if any(
+        x is None
+        for x in required
+    ):
         return False
 
     rsi_cross = (
-        rsi_values[index-1] < rsi_limit
-        and rsi_values[index] >= rsi_limit
+
+        r[i-1] < rsi_limit
+        and r[i] >= rsi_limit
+
     )
 
-    stoch_cross = (
-        k_values[index-1] <= d_values[index-1]
-        and k_values[index] > d_values[index]
-        and k_values[index] < stoch_limit
+    stochastic_cross = (
+
+        k[i-1] <= d[i-1]
+
+        and k[i] > d[i]
+
+        and k[i] < stoch_limit
+
     )
 
-    trend = fast_ema[index] > slow_ema[index]
+    trend = (
+        fast[i] > slow[i]
+    )
 
     return (
         rsi_cross
-        and stoch_cross
+        and stochastic_cross
         and trend
     )
 
 
 # =====================================================
-# COMBINATION GENERATOR
+# STRATEGY GENERATION
 # =====================================================
 
 def generate_strategies():
 
-    strategies = []
+    combinations = list(
+        itertools.product(
 
-    combinations = itertools.product(
+            [5, 7, 9, 14, 21],
 
-        [5, 7, 9, 14, 21],
+            [20, 25, 30, 35],
 
-        [20, 25, 30, 35],
+            [5, 9, 14],
 
-        [5, 9, 14],
+            [3, 5],
 
-        [3, 5],
+            [(5, 20), (9, 30), (20, 50)],
 
-        [(5, 20), (9, 30), (20, 50)],
+            [15, 20, 25]
 
-        [15, 20, 25]
-
+        )
     )
 
-    for values in combinations:
+    # Reproducible and diversified sample
+    random.Random(42).shuffle(combinations)
 
-        rsi_period, rsi_limit, k_period, d_period, ema_pair, stoch_limit = values
+    strategies = []
+
+    for x in combinations[:MAX_STRATEGIES]:
 
         strategies.append({
 
-            "rsi": rsi_period,
-            "rsi_limit": rsi_limit,
-            "stoch_k": k_period,
-            "stoch_d": d_period,
-            "ema_fast": ema_pair[0],
-            "ema_slow": ema_pair[1],
-            "stoch_limit": stoch_limit
+            "rsi": x[0],
+
+            "rsi_limit": x[1],
+
+            "stoch_k": x[2],
+
+            "stoch_d": x[3],
+
+            "ema_fast": x[4][0],
+
+            "ema_slow": x[4][1],
+
+            "stoch_limit": x[5]
 
         })
 
-    return strategies[:MAX_STRATEGIES]
+    return strategies
 
 
 # =====================================================
-# BACKTESTING
+# EVALUATION
 # =====================================================
+
+def calculate_metrics(
+    candles,
+    start,
+    end,
+    r,
+    k,
+    d,
+    fast,
+    slow,
+    atr_values,
+    strategy
+):
+
+    tp = 0
+    fp = 0
+    fn = 0
+
+    for i in range(start, end):
+
+        signal = strategy_signal(
+
+            i,
+            r,
+            k,
+            d,
+            fast,
+            slow,
+            strategy["rsi_limit"],
+            strategy["stoch_limit"]
+
+        )
+
+        actual = detect_spike(
+            candles,
+            i,
+            atr_values
+        )
+
+        if actual is None:
+            continue
+
+        if signal and actual:
+            tp += 1
+
+        elif signal and not actual:
+            fp += 1
+
+        elif not signal and actual:
+            fn += 1
+
+    precision = tp / max(1, tp + fp)
+
+    recall = tp / max(1, tp + fn)
+
+    f1 = (
+
+        2 * precision * recall
+
+    ) / max(
+        0.000001,
+        precision + recall
+    )
+
+    return {
+
+        "true_positive": tp,
+
+        "false_positive": fp,
+
+        "false_negative": fn,
+
+        "signals": tp + fp,
+
+        "precision": round(precision, 4),
+
+        "recall": round(recall, 4),
+
+        "f1": round(f1, 4)
+
+    }
+
 
 def evaluate_strategy(candles, strategy):
 
-    closes = [c["close"] for c in candles]
+    closes = [
+        c["close"]
+        for c in candles
+    ]
 
-    rsi_values = rsi(
+    r = rsi(
         closes,
         strategy["rsi"]
     )
 
-    k_values, d_values = stochastic(
+    k, d = stochastic(
+
         candles,
+
         strategy["stoch_k"],
+
         strategy["stoch_d"]
+
     )
 
     fast = ema(
@@ -558,83 +899,56 @@ def evaluate_strategy(candles, strategy):
 
     atr_values = atr(candles, 14)
 
-    split = int(len(candles) * 0.70)
+    # Chronological split:
+    # 60% training
+    # 20% validation
+    # 20% final test
 
-    results = {
-        "train": {},
-        "test": {}
+    n = len(candles)
+
+    train_end = int(n * 0.60)
+
+    validation_end = int(n * 0.80)
+
+    validation = calculate_metrics(
+
+        candles,
+
+        train_end,
+
+        validation_end - HORIZON,
+
+        r, k, d, fast, slow, atr_values,
+
+        strategy
+
+    )
+
+    test = calculate_metrics(
+
+        candles,
+
+        validation_end,
+
+        n - HORIZON,
+
+        r, k, d, fast, slow, atr_values,
+
+        strategy
+
+    )
+
+    return {
+
+        "validation": validation,
+
+        "test": test
+
     }
-
-    for section, start, end in [
-        ("train", 1, split),
-        ("test", split, len(candles)-PREDICTION_HORIZON)
-    ]:
-
-        tp = 0
-        fp = 0
-        fn = 0
-        signals = 0
-
-        for i in range(start, end):
-
-            signal = strategy_signal(
-                candles,
-                i,
-                rsi_values,
-                k_values,
-                d_values,
-                fast,
-                slow,
-                strategy["rsi_limit"],
-                strategy["stoch_limit"]
-            )
-
-            actual = detect_spike(
-                candles,
-                i,
-                atr_values
-            )
-
-            if actual is None:
-                continue
-
-            if signal:
-                signals += 1
-
-                if actual:
-                    tp += 1
-                else:
-                    fp += 1
-
-            elif actual:
-                fn += 1
-
-        precision = tp / max(1, tp + fp)
-
-        recall = tp / max(1, tp + fn)
-
-        f1 = (
-            2 * precision * recall
-            / max(0.000001, precision + recall)
-        )
-
-        results[section] = {
-
-            "signals": signals,
-            "true_positive": tp,
-            "false_positive": fp,
-            "false_negative": fn,
-            "precision": round(precision, 4),
-            "recall": round(recall, 4),
-            "f1": round(f1, 4)
-
-        }
-
-    return results
 
 
 # =====================================================
-# RESEARCH
+# RESEARCH ENGINE
 # =====================================================
 
 def research(candles):
@@ -644,42 +958,74 @@ def research(candles):
     results = []
 
     print(
-        "Combinaisons a tester:",
+        "Testing strategies:",
         len(strategies)
     )
 
-    for strategy in strategies:
+    for number, strategy in enumerate(
+        strategies,
+        1
+    ):
 
         try:
 
             evaluation = evaluate_strategy(
+
                 candles,
+
                 strategy
+
             )
 
-            test = evaluation["test"]
+            validation = evaluation["validation"]
 
-            if test["signals"] < 5:
+            # Avoid selecting strategies with too few
+            # validation observations.
+
+            if validation["signals"] < 5:
                 continue
 
             results.append({
 
                 "strategy": strategy,
+
                 "evaluation": evaluation,
-                "score": test["f1"]
+
+                "score": validation["f1"]
 
             })
 
         except Exception as e:
 
-            print("Strategy error:", e)
+            print(
+                "Strategy error:",
+                str(e)
+            )
+
+        if number % 100 == 0:
+
+            print(
+                "Progress:",
+                number,
+                "/",
+                len(strategies)
+            )
+
+    # Selection is based on validation,
+    # never on final test performance.
 
     results.sort(
+
         key=lambda x: (
+
             x["score"],
-            x["evaluation"]["test"]["precision"]
+
+            x["evaluation"]["validation"]["precision"]
+
         ),
+
         reverse=True
+
     )
 
     return results[:10]
@@ -689,16 +1035,26 @@ def research(candles):
 # CURRENT SIGNAL
 # =====================================================
 
-def get_current_signal(candles, strategy):
+def current_signal(candles, strategy):
 
-    closes = [c["close"] for c in candles]
+    closes = [
+        c["close"]
+        for c in candles
+    ]
 
-    r = rsi(closes, strategy["rsi"])
+    r = rsi(
+        closes,
+        strategy["rsi"]
+    )
 
     k, d = stochastic(
+
         candles,
+
         strategy["stoch_k"],
+
         strategy["stoch_d"]
+
     )
 
     fast = ema(
@@ -713,51 +1069,77 @@ def get_current_signal(candles, strategy):
 
     i = len(candles) - 1
 
-    if strategy_signal(
-        candles,
+    signal = strategy_signal(
+
         i,
+
         r,
+
         k,
+
         d,
+
         fast,
+
         slow,
+
         strategy["rsi_limit"],
+
         strategy["stoch_limit"]
-    ):
 
-        return "BUY"
+    )
 
-    return "WAIT"
+    return {
+
+        "signal": "BUY" if signal else "WAIT",
+
+        "price": closes[-1],
+
+        "rsi": r[-1],
+
+        "stochastic_k": k[-1],
+
+        "stochastic_d": d[-1],
+
+        "time": candles[-1]["time"]
+
+    }
 
 
 # =====================================================
 # REPORT
 # =====================================================
 
-def build_report(db, research_results):
+def build_report(db, reports):
 
     now = datetime.now(
         timezone.utc
     ).strftime("%Y-%m-%d %H:%M:%S UTC")
 
-    message = [
-        "⚡ <b>BOOM1000 SPIKE INTELLIGENCE</b>",
+    lines = [
+
+        "⚡ <b>BOOM1000 SPIKE INTELLIGENCE V3</b>",
+
         "━━━━━━━━━━━━━━━━━━",
+
         f"📅 {now}",
+
         "📡 Source: Deriv API",
+
         ""
+
     ]
 
-    for timeframe, results in research_results.items():
+    for timeframe, results in reports.items():
 
-        message.append(
-            f"📊 <b>TIMEFRAME {timeframe}</b>"
+        lines.append(
+            f"📊 <b>{timeframe}</b>"
         )
 
         if not results:
 
-            message.append(
-                "Pas assez de données pour classer les stratégies."
+            lines.append(
+                "Pas assez de données."
             )
 
             continue
@@ -765,22 +1147,14 @@ def build_report(db, research_results):
         best = results[0]
 
         strategy = best["strategy"]
+
+        validation = best["evaluation"]["validation"]
+
         test = best["evaluation"]["test"]
 
-        message.extend([
+        lines.extend([
 
-            f"🏆 Score F1: {test['f1']:.2%}",
-
-            f"🎯 Precision: {test['precision']:.2%}",
-
-            f"📈 Recall: {test['recall']:.2%}",
-
-            f"🔍 Signaux testés: {test['signals']}",
-
-            f"❌ Faux signaux: {test['false_positive']}",
-
-            "",
-            "<b>MEILLEURE COMBINAISON</b>",
+            "🏆 <b>MEILLEURE STRATEGIE</b>",
 
             f"RSI: {strategy['rsi']}",
 
@@ -790,25 +1164,51 @@ def build_report(db, research_results):
 
             f"EMA: {strategy['ema_fast']}/{strategy['ema_slow']}",
 
-            f"Stoch seuil: {strategy['stoch_limit']}",
+            "",
+
+            "<b>VALIDATION</b>",
+
+            f"F1: {validation['f1']:.2%}",
+
+            f"Precision: {validation['precision']:.2%}",
+
+            f"Signaux: {validation['signals']}",
+
+            "",
+
+            "<b>TEST INDEPENDANT</b>",
+
+            f"F1: {test['f1']:.2%}",
+
+            f"Precision: {test['precision']:.2%}",
+
+            f"Recall: {test['recall']:.2%}",
+
+            f"Faux signaux: {test['false_positive']}",
 
             ""
 
         ])
 
-    message.extend([
+    lines.extend([
 
         "━━━━━━━━━━━━━━━━━━",
-        "🧠 <b>RECHERCHE STATISTIQUE</b>",
-        f"Total combinaisons: {db['statistics']['strategies_tested']}",
-        f"Nombre analyses: {db['statistics']['runs']}",
+
+        "🧠 <b>STATISTIQUES</b>",
+
+        f"Analyses: {db['statistics']['runs']}",
+
+        f"Combinaisons testees: {db['statistics']['strategies_tested']}",
+
         "",
-        "⚠️ Résultats historiques, non garantis.",
+
+        "⚠️ Les performances historiques ne garantissent pas les futures.",
+
         "Aucun ordre automatique."
 
     ])
 
-    return "\n".join(message)
+    return "\n".join(lines)
 
 
 # =====================================================
@@ -817,9 +1217,11 @@ def build_report(db, research_results):
 
 def main():
 
-    print("================================")
-    print(" BOOM1000 SPIKE INTELLIGENCE ")
-    print("================================")
+    print("=" * 50)
+
+    print(PROJECT)
+
+    print("=" * 50)
 
     db = load_db()
 
@@ -827,84 +1229,139 @@ def main():
 
     try:
 
+        # CONNECTION
+
         ws = connect_deriv()
 
         symbol = get_active_symbols(ws)
 
-        ticks = get_ticks(ws, symbol)
+        # TICKS
+
+        ticks = get_ticks(
+            ws,
+            symbol
+        )
 
         db["ticks"].extend(ticks)
 
+        unique = {}
+
+        for tick in db["ticks"]:
+
+            key = (
+                tick["time"],
+                tick["price"]
+            )
+
+            unique[key] = tick
+
         db["ticks"] = sorted(
-            {
-                (x["time"], x["price"]): x
-                for x in db["ticks"]
-            }.values(),
+
+            unique.values(),
+
             key=lambda x: x["time"]
+
         )[-10000:]
 
-        research_results = {}
+        print(
+            "Ticks collected:",
+            len(ticks)
+        )
+
+        reports = {}
+
+        # M1 / M3 RESEARCH
 
         for timeframe, granularity in TIMEFRAMES.items():
 
-            print("Collecte", timeframe)
-
-            candles = get_candles(
-                ws,
-                symbol,
-                granularity
+            print(
+                "Collecting:",
+                timeframe
             )
 
-            if len(candles) < 150:
+            candles = get_candles(
 
-                print("Historique insuffisant:", timeframe)
+                ws,
+
+                symbol,
+
+                granularity
+
+            )
+
+            if len(candles) < 200:
+
+                print(
+                    "Insufficient candles:",
+                    timeframe
+                )
 
                 continue
 
-            db["candles"][timeframe] = candles[-2000:]
+            db["candles"][timeframe] = candles[-1000:]
 
             results = research(candles)
 
-            research_results[timeframe] = results
+            reports[timeframe] = results
 
-            if results:
+            if not results:
+                continue
 
-                best = results[0]
+            best = results[0]
 
-                db["best_strategies"][timeframe] = best
+            signal = current_signal(
 
-                signal = get_current_signal(
-                    candles,
-                    best["strategy"]
-                )
+                candles,
 
-                db["signals"].append({
+                best["strategy"]
 
-                    "time": datetime.now(
-                        timezone.utc
-                    ).isoformat(),
+            )
 
-                    "timeframe": timeframe,
+            # Store compact result
 
-                    "signal": signal,
+            db["best_strategies"][timeframe] = {
 
-                    "strategy": best["strategy"],
+                "strategy": best["strategy"],
 
-                    "historical_score": best["score"]
+                "validation": best["evaluation"]["validation"],
 
-                })
+                "test": best["evaluation"]["test"],
 
-                print(
-                    timeframe,
-                    "SIGNAL:",
-                    signal
-                )
+                "selection_score": best["score"]
+
+            }
+
+            db["signals"].append({
+
+                "time": datetime.now(
+                    timezone.utc
+                ).isoformat(),
+
+                "timeframe": timeframe,
+
+                **signal,
+
+                "strategy": best["strategy"],
+
+                "validation_score": best["score"]
+
+            })
+
+            print(
+                timeframe,
+                signal["signal"]
+            )
+
+        # DATABASE UPDATE
 
         db["statistics"]["runs"] += 1
 
         db["statistics"]["strategies_tested"] += (
+
             len(generate_strategies())
+
             * len(TIMEFRAMES)
+
         )
 
         db["analyses"].append({
@@ -915,7 +1372,29 @@ def main():
 
             "symbol": symbol,
 
-            "strategies": research_results
+            "results": {
+
+                timeframe: [
+
+                    {
+
+                        "strategy": x["strategy"],
+
+                        "score": x["score"],
+
+                        "validation": x["evaluation"]["validation"],
+
+                        "test": x["evaluation"]["test"]
+
+                    }
+
+                    for x in results
+
+                ]
+
+                for timeframe, results in reports.items()
+
+            }
 
         })
 
@@ -925,25 +1404,41 @@ def main():
 
         save_db(db)
 
-        report = build_report(
-            db,
-            research_results
+        print(
+            "Database saved"
         )
 
-        telegram(report)
+        # TELEGRAM
 
-        print("Analyse terminee avec succes")
+        message = build_report(
+            db,
+            reports
+        )
+
+        if not telegram(message):
+
+            raise Exception(
+                "Telegram report delivery failed"
+            )
+
+        print(
+            "Analysis completed successfully"
+        )
 
     except Exception as e:
 
-        error = (
-            "🚨 <b>BOOM1000 ERROR</b>\n"
-            f"<code>{str(e)[:1000]}</code>"
+        print(
+            "FATAL ERROR:",
+            str(e)
         )
 
-        print(error)
+        telegram(
 
-        telegram(error)
+            "🚨 <b>BOOM1000 ERROR</b>\n\n"
+
+            f"<code>{str(e)[:2500]}</code>"
+
+        )
 
         raise
 
@@ -951,8 +1446,13 @@ def main():
 
         if ws:
 
-            ws.close()
+            try:
+                ws.close()
+
+            except Exception:
+                pass
 
 
 if __name__ == "__main__":
+
     main()
