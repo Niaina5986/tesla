@@ -1,0 +1,64 @@
+{
+  "version": "2.0",
+  "last_analysis": "2026-11-25T03:00:13.277135+00:00",
+  "last_successful_analysis": "2026-11-25T03:00:13.277146+00:00",
+  "tickets": {
+    "4290cb6a0351fcf7": {
+      "mode": "COMBINÉ",
+      "legs": [
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "4b220aa94adc3b0fd23d9d892a130646",
+          "home": "St. John's Red Storm",
+          "away": "Oregon Ducks",
+          "selection": "St. John's Red Storm",
+          "odds": 1.15,
+          "market_probability": 0.82483,
+          "confidence": 94,
+          "bookmakers": 12,
+          "start": "2026-11-25T03:30:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "d7e124b82ed9910d5aa3077d19c6ada1",
+          "home": "South Dakota St Jackrabbits",
+          "away": "Abilene Christian Wildcats",
+          "selection": "South Dakota St Jackrabbits",
+          "odds": 1.28,
+          "market_probability": 0.73936,
+          "confidence": 93,
+          "bookmakers": 8,
+          "start": "2026-11-25T19:00:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "3765877faa0c50d3b04fa96abdbb3568",
+          "home": "Colorado St Rams",
+          "away": "VCU Rams",
+          "selection": "VCU Rams",
+          "odds": 1.4,
+          "market_probability": 0.68001,
+          "confidence": 92,
+          "bookmakers": 12,
+          "start": "2026-11-25T03:30:00Z"
+        }
+      ],
+      "odds": 2.06,
+      "confidence": 93,
+      "status": "pending",
+      "created_at": "2026-11-25T03:00:12.744126+00:00",
+      "message_sent": true
+    }
+  },
+  "reported_results": [],
+  "statistics": {
+    "analyses": 1,
+    "signals": 1,
+    "won": 0,
+    "lost": 0,
+    "pending": 1
+  }
+}
