@@ -1,4 +1,4 @@
-name: BOOM1000 SPIKE INTELLIGENCE
+name: BOOM1000 SPIKE INTELLIGENCE V3
 
 on:
   workflow_dispatch:
@@ -10,13 +10,16 @@ permissions:
   contents: write
 
 concurrency:
-  group: boom1000-spike
+  group: boom1000-intelligence
   cancel-in-progress: false
 
 jobs:
   spike-analysis:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+
+    env:
+      PYTHONUNBUFFERED: "1"
 
     steps:
       - name: Checkout repository
@@ -35,25 +38,29 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run BOOM1000 analysis
+      - name: Run BOOM1000 Intelligence
         env:
           DERIV_APP_ID: ${{ secrets.DERIV_APP_ID }}
-          DERIV_API_TOKEN: ${{ secrets.DERIV_API_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           python -u spike.py
 
-      - name: Save dataset
+      - name: Save dataset.json
+        if: always()
         run: |
-          git config user.name "BOOM1000 Intelligence"
-          git config user.email "actions@github.com"
+          if [ -f dataset.json ]; then
+            git config user.name "BOOM1000 Intelligence"
+            git config user.email "actions@github.com"
 
-          git add dataset.json
+            git add dataset.json
 
-          if ! git diff --cached --quiet; then
-            git commit -m "Update BOOM1000 intelligence dataset"
-            git push origin HEAD:main
+            if ! git diff --cached --quiet; then
+              git commit -m "Update BOOM1000 research dataset"
+              git push origin HEAD:main
+            else
+              echo "No database changes"
+            fi
           else
-            echo "No dataset changes"
+            echo "dataset.json not created"
           fi
