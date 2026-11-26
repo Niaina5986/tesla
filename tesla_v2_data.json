@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "last_analysis": "2026-11-26T11:29:23.382943+00:00",
-  "last_successful_analysis": "2026-11-26T11:29:23.382956+00:00",
+  "last_analysis": "2026-11-26T20:27:31.891116+00:00",
+  "last_successful_analysis": "2026-11-26T20:27:31.891127+00:00",
   "tickets": {
     "4290cb6a0351fcf7": {
       "mode": "COMBINÉ",
@@ -268,6 +268,55 @@
       "status": "pending",
       "created_at": "2026-11-26T11:29:23.023161+00:00",
       "message_sent": true
+    },
+    "0d184b84e2a92bca": {
+      "mode": "COMBINÉ",
+      "legs": [
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "3ce2ec8471b46e17dc7b246a086a3e8d",
+          "home": "Oregon Ducks",
+          "away": "Texas Tech Red Raiders",
+          "selection": "Texas Tech Red Raiders",
+          "odds": 1.17,
+          "market_probability": 0.81007,
+          "confidence": 94,
+          "bookmakers": 12,
+          "start": "2026-11-27T04:30:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "8cdf0f9df5b4480c117a9455b60b067b",
+          "home": "LSU Tigers",
+          "away": "SMU Mustangs",
+          "selection": "LSU Tigers",
+          "odds": 1.3,
+          "market_probability": 0.72999,
+          "confidence": 92,
+          "bookmakers": 13,
+          "start": "2026-11-27T00:00:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "527932f3d90f638641c5371efdae7b50",
+          "home": "Michigan St Spartans",
+          "away": "Arkansas Razorbacks",
+          "selection": "Michigan St Spartans",
+          "odds": 1.42,
+          "market_probability": 0.66764,
+          "confidence": 91,
+          "bookmakers": 13,
+          "start": "2026-11-26T21:30:00Z"
+        }
+      ],
+      "odds": 2.16,
+      "confidence": 92,
+      "status": "pending",
+      "created_at": "2026-11-26T20:27:31.124200+00:00",
+      "message_sent": true
     }
   },
   "reported_results": [
@@ -276,10 +325,10 @@
     "425a5549130d7bac"
   ],
   "statistics": {
-    "analyses": 5,
-    "signals": 5,
+    "analyses": 6,
+    "signals": 6,
     "won": 1,
     "lost": 2,
-    "pending": 2
+    "pending": 3
   }
 }
