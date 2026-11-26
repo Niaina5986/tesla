@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "last_analysis": "2026-11-25T19:56:05.752450+00:00",
-  "last_successful_analysis": "2026-11-25T19:56:05.752465+00:00",
+  "last_analysis": "2026-11-26T02:37:25.066145+00:00",
+  "last_successful_analysis": "2026-11-26T02:37:25.066152+00:00",
   "tickets": {
     "4290cb6a0351fcf7": {
       "mode": "COMBINÉ",
@@ -31,7 +31,8 @@
           "market_probability": 0.73936,
           "confidence": 93,
           "bookmakers": 8,
-          "start": "2026-11-25T19:00:00Z"
+          "start": "2026-11-25T19:00:00Z",
+          "result": "lost"
         },
         {
           "sport": "basketball",
@@ -50,7 +51,7 @@
       ],
       "odds": 2.06,
       "confidence": 93,
-      "status": "pending",
+      "status": "lost",
       "created_at": "2026-11-25T03:00:12.744126+00:00",
       "message_sent": true
     },
@@ -81,7 +82,8 @@
           "market_probability": 0.71435,
           "confidence": 92,
           "bookmakers": 8,
-          "start": "2026-11-26T00:00:00Z"
+          "start": "2026-11-26T00:00:00Z",
+          "result": "won"
         },
         {
           "sport": "basketball",
@@ -94,7 +96,8 @@
           "market_probability": 0.71388,
           "confidence": 92,
           "bookmakers": 20,
-          "start": "2026-11-25T19:45:00Z"
+          "start": "2026-11-25T19:45:00Z",
+          "result": "won"
         }
       ],
       "odds": 2.3,
@@ -117,7 +120,8 @@
           "market_probability": 0.84772,
           "confidence": 95,
           "bookmakers": 9,
-          "start": "2026-11-25T23:00:00Z"
+          "start": "2026-11-25T23:00:00Z",
+          "result": "won"
         },
         {
           "sport": "basketball",
@@ -156,22 +160,75 @@
           "market_probability": 0.72665,
           "confidence": 94,
           "bookmakers": 9,
-          "start": "2026-11-26T00:00:00Z"
+          "start": "2026-11-26T00:00:00Z",
+          "result": "lost"
         }
       ],
       "odds": 2.08,
       "confidence": 95,
-      "status": "pending",
+      "status": "lost",
       "created_at": "2026-11-25T19:56:05.151731+00:00",
+      "message_sent": true
+    },
+    "8994f2e6f60d7d3d": {
+      "mode": "COMBINÉ",
+      "legs": [
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "3ce2ec8471b46e17dc7b246a086a3e8d",
+          "home": "Oregon Ducks",
+          "away": "Texas Tech Red Raiders",
+          "selection": "Texas Tech Red Raiders",
+          "odds": 1.19,
+          "market_probability": 0.79175,
+          "confidence": 95,
+          "bookmakers": 6,
+          "start": "2026-11-27T04:30:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "8cdf0f9df5b4480c117a9455b60b067b",
+          "home": "LSU Tigers",
+          "away": "SMU Mustangs",
+          "selection": "LSU Tigers",
+          "odds": 1.43,
+          "market_probability": 0.66053,
+          "confidence": 93,
+          "bookmakers": 7,
+          "start": "2026-11-27T00:00:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "ae417d224a63774815f9e4816a7d776f",
+          "home": "UCLA Bruins",
+          "away": "Saint Mary's Gaels",
+          "selection": "UCLA Bruins",
+          "odds": 1.28,
+          "market_probability": 0.73887,
+          "confidence": 92,
+          "bookmakers": 7,
+          "start": "2026-11-26T22:00:00Z"
+        }
+      ],
+      "odds": 2.18,
+      "confidence": 93,
+      "status": "pending",
+      "created_at": "2026-11-26T02:37:24.565096+00:00",
       "message_sent": true
     }
   },
-  "reported_results": [],
+  "reported_results": [
+    "4290cb6a0351fcf7",
+    "085f248f664b569f"
+  ],
   "statistics": {
-    "analyses": 3,
-    "signals": 3,
+    "analyses": 4,
+    "signals": 4,
     "won": 0,
-    "lost": 0,
-    "pending": 3
+    "lost": 2,
+    "pending": 2
   }
 }
