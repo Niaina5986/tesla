@@ -1,7 +1,7 @@
 {
   "version": "2.0",
-  "last_analysis": "2026-11-26T02:37:25.066145+00:00",
-  "last_successful_analysis": "2026-11-26T02:37:25.066152+00:00",
+  "last_analysis": "2026-11-26T11:29:23.382943+00:00",
+  "last_successful_analysis": "2026-11-26T11:29:23.382956+00:00",
   "tickets": {
     "4290cb6a0351fcf7": {
       "mode": "COMBINÉ",
@@ -69,7 +69,8 @@
           "market_probability": 0.72315,
           "confidence": 92,
           "bookmakers": 7,
-          "start": "2026-11-26T02:00:00Z"
+          "start": "2026-11-26T02:00:00Z",
+          "result": "won"
         },
         {
           "sport": "basketball",
@@ -102,7 +103,7 @@
       ],
       "odds": 2.3,
       "confidence": 92,
-      "status": "pending",
+      "status": "won",
       "created_at": "2026-11-25T10:04:22.624202+00:00",
       "message_sent": true
     },
@@ -218,16 +219,66 @@
       "status": "pending",
       "created_at": "2026-11-26T02:37:24.565096+00:00",
       "message_sent": true
+    },
+    "ce2b4e76331de17e": {
+      "mode": "COMBINÉ",
+      "legs": [
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "3ce2ec8471b46e17dc7b246a086a3e8d",
+          "home": "Oregon Ducks",
+          "away": "Texas Tech Red Raiders",
+          "selection": "Texas Tech Red Raiders",
+          "odds": 1.19,
+          "market_probability": 0.7897,
+          "confidence": 94,
+          "bookmakers": 9,
+          "start": "2026-11-27T04:30:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "1ea8ceedbe8d577ba3c6ed8239137c4c",
+          "home": "Texas Longhorns",
+          "away": "Georgetown Hoyas",
+          "selection": "Texas Longhorns",
+          "odds": 1.23,
+          "market_probability": 0.77041,
+          "confidence": 93,
+          "bookmakers": 12,
+          "start": "2026-11-26T19:30:00Z"
+        },
+        {
+          "sport": "basketball",
+          "sport_key": "basketball_ncaab",
+          "event_id": "527932f3d90f638641c5371efdae7b50",
+          "home": "Michigan St Spartans",
+          "away": "Arkansas Razorbacks",
+          "selection": "Michigan St Spartans",
+          "odds": 1.42,
+          "market_probability": 0.66553,
+          "confidence": 91,
+          "bookmakers": 12,
+          "start": "2026-11-26T21:30:00Z"
+        }
+      ],
+      "odds": 2.08,
+      "confidence": 93,
+      "status": "pending",
+      "created_at": "2026-11-26T11:29:23.023161+00:00",
+      "message_sent": true
     }
   },
   "reported_results": [
     "4290cb6a0351fcf7",
-    "085f248f664b569f"
+    "085f248f664b569f",
+    "425a5549130d7bac"
   ],
   "statistics": {
-    "analyses": 4,
-    "signals": 4,
-    "won": 0,
+    "analyses": 5,
+    "signals": 5,
+    "won": 1,
     "lost": 2,
     "pending": 2
   }
