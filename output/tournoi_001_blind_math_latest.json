@@ -1,0 +1,1289 @@
+{
+  "target_round": 37,
+  "history_matches": 360,
+  "goal_searches": [
+    {
+      "candidate_goal": 0,
+      "formula_count": 240,
+      "bfs_operations": 12000,
+      "dfs_nodes": 5795,
+      "formulas": [
+        {
+          "expression": "ag",
+          "result": 0,
+          "target": 0,
+          "depth": 0,
+          "complexity_score": 0.970874,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "btts",
+            "ag",
+            "btts",
+            "ag",
+            "btts"
+          ]
+        },
+        {
+          "expression": "ln(1!)",
+          "result": 0,
+          "target": 0,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(ag^1)",
+          "result": 0,
+          "target": 0,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "btts",
+            "hg",
+            "difference",
+            "total",
+            "team_gd"
+          ]
+        },
+        {
+          "expression": "(ag^2)",
+          "result": 0,
+          "target": 0,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack",
+            "btts"
+          ]
+        },
+        {
+          "expression": "(ag^3)",
+          "result": 0,
+          "target": 0,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "btts"
+          ]
+        },
+        {
+          "expression": "(ag^6)",
+          "result": 0,
+          "target": 0,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "btts",
+            "hg",
+            "difference",
+            "total",
+            "team_gd"
+          ]
+        },
+        {
+          "expression": "(ag^4)",
+          "result": 0,
+          "target": 0,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "total",
+            "hg",
+            "ag",
+            "difference",
+            "round",
+            "rank",
+            "btts",
+            "team_gd"
+          ]
+        },
+        {
+          "expression": "(ag^5)",
+          "result": 0,
+          "target": 0,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "total",
+            "hg",
+            "difference",
+            "round",
+            "ag",
+            "rank",
+            "btts",
+            "team_gd"
+          ]
+        },
+        {
+          "expression": "abs(ag)",
+          "result": 0,
+          "target": 0,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "btts",
+            "ag",
+            "btts",
+            "ag",
+            "btts"
+          ]
+        },
+        {
+          "expression": "sin(ag)",
+          "result": 0,
+          "target": 0,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "btts",
+            "ag",
+            "btts",
+            "ag",
+            "btts"
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_goal": 1,
+      "formula_count": 241,
+      "bfs_operations": 12000,
+      "dfs_nodes": 11631,
+      "formulas": [
+        {
+          "expression": "1!",
+          "result": 1,
+          "target": 1,
+          "depth": 0,
+          "complexity_score": 0.970874,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(0)!",
+          "result": 1,
+          "target": 1,
+          "depth": 1,
+          "complexity_score": 0.568182,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "btts",
+            "ag",
+            "btts",
+            "ag",
+            "btts"
+          ]
+        },
+        {
+          "expression": "1/(1!)",
+          "result": 1,
+          "target": 1,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(1!^2)",
+          "result": 1,
+          "target": 1,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(1!^3)",
+          "result": 1,
+          "target": 1,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(1!^6)",
+          "result": 1,
+          "target": 1,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(1!^4)",
+          "result": 1,
+          "target": 1,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "total",
+            "hg",
+            "ag",
+            "difference",
+            "round",
+            "rank",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(1!^5)",
+          "result": 1,
+          "target": 1,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "total",
+            "hg",
+            "difference",
+            "round",
+            "ag",
+            "rank",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "cos(ag)",
+          "result": 1,
+          "target": 1,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "btts",
+            "ag",
+            "btts",
+            "ag",
+            "btts"
+          ]
+        },
+        {
+          "expression": "exp(ag)",
+          "result": 1,
+          "target": 1,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "btts",
+            "ag",
+            "btts",
+            "ag",
+            "btts"
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_goal": 2,
+      "formula_count": 173,
+      "bfs_operations": 12000,
+      "dfs_nodes": 30000,
+      "formulas": [
+        {
+          "expression": "ag",
+          "result": 2,
+          "target": 2,
+          "depth": 0,
+          "complexity_score": 0.970874,
+          "sources": [
+            "ag",
+            "difference",
+            "ag",
+            "total",
+            "ag",
+            "round",
+            "hg",
+            "round"
+          ]
+        },
+        {
+          "expression": "abs(ag)",
+          "result": 2,
+          "target": 2,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "difference",
+            "ag",
+            "total",
+            "ag",
+            "round",
+            "hg",
+            "round"
+          ]
+        },
+        {
+          "expression": "(ag+ag)",
+          "result": 2,
+          "target": 2,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack",
+            "btts"
+          ]
+        },
+        {
+          "expression": "(ag-ag)",
+          "result": 2,
+          "target": 2,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack",
+            "btts"
+          ]
+        },
+        {
+          "expression": "(1!+1!)",
+          "result": 2,
+          "target": 2,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(1!*ag)",
+          "result": 2,
+          "target": 2,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack"
+          ]
+        },
+        {
+          "expression": "(ag/1!)",
+          "result": 2,
+          "target": 2,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(ag-1!)",
+          "result": 2,
+          "target": 2,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(ag*1!)",
+          "result": 2,
+          "target": 2,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(3!/ag)",
+          "result": 2,
+          "target": 2,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd"
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_goal": 3,
+      "formula_count": 116,
+      "bfs_operations": 12000,
+      "dfs_nodes": 30000,
+      "formulas": [
+        {
+          "expression": "ag",
+          "result": 3,
+          "target": 3,
+          "depth": 0,
+          "complexity_score": 0.970874,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "hg",
+            "ag",
+            "total",
+            "hg"
+          ]
+        },
+        {
+          "expression": "abs(ag)",
+          "result": 3,
+          "target": 3,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "hg",
+            "ag",
+            "total",
+            "hg"
+          ]
+        },
+        {
+          "expression": "(ag+ag)",
+          "result": 3,
+          "target": 3,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "btts"
+          ]
+        },
+        {
+          "expression": "(ag-ag)",
+          "result": 3,
+          "target": 3,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "btts"
+          ]
+        },
+        {
+          "expression": "(1!+ag)",
+          "result": 3,
+          "target": 3,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack"
+          ]
+        },
+        {
+          "expression": "(1!*ag)",
+          "result": 3,
+          "target": 3,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd"
+          ]
+        },
+        {
+          "expression": "(ag/1!)",
+          "result": 3,
+          "target": 3,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(ag+1!)",
+          "result": 3,
+          "target": 3,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(3!/ag)",
+          "result": 3,
+          "target": 3,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack"
+          ]
+        },
+        {
+          "expression": "(ag*1!)",
+          "result": 3,
+          "target": 3,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "factorial_transform"
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_goal": 4,
+      "formula_count": 106,
+      "bfs_operations": 12000,
+      "dfs_nodes": 30000,
+      "formulas": [
+        {
+          "expression": "total",
+          "result": 4,
+          "target": 4,
+          "depth": 0,
+          "complexity_score": 0.930233,
+          "sources": [
+            "total",
+            "hg",
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "total",
+            "total"
+          ]
+        },
+        {
+          "expression": "(1!+ag)",
+          "result": 4,
+          "target": 4,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd"
+          ]
+        },
+        {
+          "expression": "(ag+ag)",
+          "result": 4,
+          "target": 4,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack"
+          ]
+        },
+        {
+          "expression": "(ag*ag)",
+          "result": 4,
+          "target": 4,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack"
+          ]
+        },
+        {
+          "expression": "(3!-ag)",
+          "result": 4,
+          "target": 4,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "difference",
+            "total",
+            "round",
+            "hg",
+            "rank",
+            "Liverpool_away_attack"
+          ]
+        },
+        {
+          "expression": "(ag+1!)",
+          "result": 4,
+          "target": 4,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(4!/3!)",
+          "result": 4,
+          "target": 4,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "abs(total)",
+          "result": 4,
+          "target": 4,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "total",
+            "hg",
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "total",
+            "total"
+          ]
+        },
+        {
+          "expression": "(ag+total)",
+          "result": 4,
+          "target": 4,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "difference",
+            "total",
+            "team_gd",
+            "round",
+            "rank"
+          ]
+        },
+        {
+          "expression": "(total-ag)",
+          "result": 4,
+          "target": 4,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "total",
+            "hg",
+            "ag",
+            "difference",
+            "round",
+            "rank",
+            "btts",
+            "team_gd"
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_goal": 5,
+      "formula_count": 96,
+      "bfs_operations": 12000,
+      "dfs_nodes": 30000,
+      "formulas": [
+        {
+          "expression": "total",
+          "result": 5,
+          "target": 5,
+          "depth": 0,
+          "complexity_score": 0.930233,
+          "sources": [
+            "total",
+            "total",
+            "total",
+            "total",
+            "total",
+            "hg",
+            "total",
+            "difference"
+          ]
+        },
+        {
+          "expression": "(3!-1!)",
+          "result": 5,
+          "target": 5,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(ag+ag)",
+          "result": 5,
+          "target": 5,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "Liverpool_away_attack"
+          ]
+        },
+        {
+          "expression": "(5!/4!)",
+          "result": 5,
+          "target": 5,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "abs(total)",
+          "result": 5,
+          "target": 5,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "total",
+            "total",
+            "total",
+            "total",
+            "total",
+            "hg",
+            "total",
+            "difference"
+          ]
+        },
+        {
+          "expression": "(ag+total)",
+          "result": 5,
+          "target": 5,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "difference",
+            "total",
+            "team_gd",
+            "round",
+            "rank"
+          ]
+        },
+        {
+          "expression": "(total-ag)",
+          "result": 5,
+          "target": 5,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "total",
+            "hg",
+            "difference",
+            "round",
+            "ag",
+            "rank",
+            "btts",
+            "team_gd"
+          ]
+        },
+        {
+          "expression": "(1!+total)",
+          "result": 5,
+          "target": 5,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "factorial_transform",
+            "total",
+            "hg",
+            "ag",
+            "difference",
+            "round",
+            "rank"
+          ]
+        },
+        {
+          "expression": "(1!*total)",
+          "result": 5,
+          "target": 5,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "factorial_transform",
+            "total",
+            "hg",
+            "difference",
+            "round",
+            "ag",
+            "rank"
+          ]
+        },
+        {
+          "expression": "(total/1!)",
+          "result": 5,
+          "target": 5,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "total",
+            "hg",
+            "difference",
+            "round",
+            "ag",
+            "rank",
+            "factorial_transform"
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_goal": 6,
+      "formula_count": 93,
+      "bfs_operations": 12000,
+      "dfs_nodes": 30000,
+      "formulas": [
+        {
+          "expression": "3!",
+          "result": 6,
+          "target": 6,
+          "depth": 0,
+          "complexity_score": 0.970874,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(3!^1)",
+          "result": 6,
+          "target": 6,
+          "depth": 1,
+          "complexity_score": 0.558659,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "abs(3!)",
+          "result": 6,
+          "target": 6,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(ag+3!)",
+          "result": 6,
+          "target": 6,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "difference",
+            "total",
+            "team_gd",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(3!-ag)",
+          "result": 6,
+          "target": 6,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "btts",
+            "hg",
+            "difference",
+            "total",
+            "team_gd"
+          ]
+        },
+        {
+          "expression": "(1!*3!)",
+          "result": 6,
+          "target": 6,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(3!/1!)",
+          "result": 6,
+          "target": 6,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(ag*ag)",
+          "result": 6,
+          "target": 6,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd",
+            "Liverpool_away_attack"
+          ]
+        },
+        {
+          "expression": "(ag+ag)",
+          "result": 6,
+          "target": 6,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "ag",
+            "hg",
+            "total",
+            "difference",
+            "round",
+            "rank",
+            "team_gd"
+          ]
+        },
+        {
+          "expression": "(3!+ag)",
+          "result": 6,
+          "target": 6,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform",
+            "ag",
+            "btts",
+            "hg",
+            "difference",
+            "total",
+            "team_gd"
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_goal": 7,
+      "formula_count": 159,
+      "bfs_operations": 12000,
+      "dfs_nodes": 30000,
+      "formulas": [
+        {
+          "expression": "round",
+          "result": 7,
+          "target": 7,
+          "depth": 0,
+          "complexity_score": 0.930233,
+          "sources": [
+            "round",
+            "round",
+            "round",
+            "round",
+            "round",
+            "round",
+            "round",
+            "round"
+          ]
+        },
+        {
+          "expression": "(1!+3!)",
+          "result": 7,
+          "target": 7,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(3!+1!)",
+          "result": 7,
+          "target": 7,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(7!/6!)",
+          "result": 7,
+          "target": 7,
+          "depth": 1,
+          "complexity_score": 0.554017,
+          "sources": [
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "(round^1)",
+          "result": 7,
+          "target": 7,
+          "depth": 1,
+          "complexity_score": 0.544959,
+          "sources": [
+            "round",
+            "rank",
+            "factorial_transform"
+          ]
+        },
+        {
+          "expression": "abs(round)",
+          "result": 7,
+          "target": 7,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "round",
+            "round",
+            "round",
+            "round",
+            "round",
+            "round",
+            "round",
+            "round"
+          ]
+        },
+        {
+          "expression": "(ag+round)",
+          "result": 7,
+          "target": 7,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "ag",
+            "btts",
+            "hg",
+            "difference",
+            "total",
+            "team_gd",
+            "round",
+            "rank"
+          ]
+        },
+        {
+          "expression": "(round-ag)",
+          "result": 7,
+          "target": 7,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "round",
+            "team_gd",
+            "rank",
+            "ag",
+            "hg",
+            "total",
+            "difference"
+          ]
+        },
+        {
+          "expression": "(1!*round)",
+          "result": 7,
+          "target": 7,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "factorial_transform",
+            "round",
+            "rank"
+          ]
+        },
+        {
+          "expression": "(round/1!)",
+          "result": 7,
+          "target": 7,
+          "depth": 1,
+          "complexity_score": 0.540541,
+          "sources": [
+            "round",
+            "rank",
+            "factorial_transform"
+          ]
+        }
+      ]
+    }
+  ]
+}

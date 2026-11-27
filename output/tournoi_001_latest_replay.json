@@ -1,0 +1,482 @@
+[
+  {
+    "home": "Bournemouth",
+    "away": "Leeds",
+    "observed": "3-1",
+    "prior_history_top10": [
+      {
+        "score": "1-0",
+        "model_probability_percent": 11.90083
+      },
+      {
+        "score": "1-1",
+        "model_probability_percent": 11.23968
+      },
+      {
+        "score": "2-0",
+        "model_probability_percent": 10.32572
+      },
+      {
+        "score": "2-1",
+        "model_probability_percent": 9.75207
+      },
+      {
+        "score": "0-0",
+        "model_probability_percent": 6.85811
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 6.4771
+      },
+      {
+        "score": "3-0",
+        "model_probability_percent": 5.97272
+      },
+      {
+        "score": "3-1",
+        "model_probability_percent": 5.6409
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 5.30763
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 4.60515
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  },
+  {
+    "home": "Everton",
+    "away": "London Reds",
+    "observed": "1-1",
+    "prior_history_top10": [
+      {
+        "score": "1-1",
+        "model_probability_percent": 13.11458
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 11.10195
+      },
+      {
+        "score": "1-0",
+        "model_probability_percent": 10.97965
+      },
+      {
+        "score": "0-0",
+        "model_probability_percent": 9.29465
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 7.83232
+      },
+      {
+        "score": "2-1",
+        "model_probability_percent": 7.74604
+      },
+      {
+        "score": "0-2",
+        "model_probability_percent": 6.63033
+      },
+      {
+        "score": "2-0",
+        "model_probability_percent": 6.48505
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 4.62611
+      },
+      {
+        "score": "1-3",
+        "model_probability_percent": 3.11842
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  },
+  {
+    "home": "Fulham",
+    "away": "London Blues",
+    "observed": "1-0",
+    "prior_history_top10": [
+      {
+        "score": "1-1",
+        "model_probability_percent": 11.65046
+      },
+      {
+        "score": "1-0",
+        "model_probability_percent": 10.98626
+      },
+      {
+        "score": "2-1",
+        "model_probability_percent": 9.59449
+      },
+      {
+        "score": "2-0",
+        "model_probability_percent": 9.0475
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 7.07349
+      },
+      {
+        "score": "0-0",
+        "model_probability_percent": 6.67023
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 6.17741
+      },
+      {
+        "score": "3-1",
+        "model_probability_percent": 5.26757
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 5.08728
+      },
+      {
+        "score": "3-0",
+        "model_probability_percent": 4.96726
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  },
+  {
+    "home": "Liverpool",
+    "away": "Brighton",
+    "observed": "4-1",
+    "prior_history_top10": [
+      {
+        "score": "2-1",
+        "model_probability_percent": 9.64286
+      },
+      {
+        "score": "1-1",
+        "model_probability_percent": 8.85436
+      },
+      {
+        "score": "2-0",
+        "model_probability_percent": 7.78553
+      },
+      {
+        "score": "1-0",
+        "model_probability_percent": 7.1489
+      },
+      {
+        "score": "3-1",
+        "model_probability_percent": 7.00105
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 5.97164
+      },
+      {
+        "score": "3-0",
+        "model_probability_percent": 5.65256
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 5.48334
+      },
+      {
+        "score": "3-2",
+        "model_probability_percent": 4.33562
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 4.06517
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  },
+  {
+    "home": "Manchester Blue",
+    "away": "Manchester Red",
+    "observed": "1-2",
+    "prior_history_top10": [
+      {
+        "score": "1-1",
+        "model_probability_percent": 10.99645
+      },
+      {
+        "score": "1-0",
+        "model_probability_percent": 10.80229
+      },
+      {
+        "score": "2-1",
+        "model_probability_percent": 9.83751
+      },
+      {
+        "score": "2-0",
+        "model_probability_percent": 9.66381
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 6.14596
+      },
+      {
+        "score": "0-0",
+        "model_probability_percent": 6.03744
+      },
+      {
+        "score": "3-1",
+        "model_probability_percent": 5.86714
+      },
+      {
+        "score": "3-0",
+        "model_probability_percent": 5.76355
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 5.59705
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 5.00716
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  },
+  {
+    "home": "N. Forest",
+    "away": "Brentford",
+    "observed": "2-1",
+    "prior_history_top10": [
+      {
+        "score": "1-1",
+        "model_probability_percent": 11.95568
+      },
+      {
+        "score": "1-0",
+        "model_probability_percent": 9.28537
+      },
+      {
+        "score": "2-1",
+        "model_probability_percent": 8.86908
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 8.05823
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 7.69696
+      },
+      {
+        "score": "2-0",
+        "model_probability_percent": 6.88817
+      },
+      {
+        "score": "0-0",
+        "model_probability_percent": 6.25842
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 5.70983
+      },
+      {
+        "score": "0-2",
+        "model_probability_percent": 5.18782
+      },
+      {
+        "score": "3-1",
+        "model_probability_percent": 4.38623
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  },
+  {
+    "home": "Newcastle",
+    "away": "Burnley",
+    "observed": "3-0",
+    "prior_history_top10": [
+      {
+        "score": "1-0",
+        "model_probability_percent": 12.41539
+      },
+      {
+        "score": "2-0",
+        "model_probability_percent": 11.72564
+      },
+      {
+        "score": "1-1",
+        "model_probability_percent": 10.34616
+      },
+      {
+        "score": "2-1",
+        "model_probability_percent": 9.77137
+      },
+      {
+        "score": "3-0",
+        "model_probability_percent": 7.38281
+      },
+      {
+        "score": "0-0",
+        "model_probability_percent": 6.57285
+      },
+      {
+        "score": "3-1",
+        "model_probability_percent": 6.15234
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 5.47738
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 4.3109
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 4.0714
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  },
+  {
+    "home": "Spurs",
+    "away": "West Ham",
+    "observed": "1-1",
+    "prior_history_top10": [
+      {
+        "score": "2-1",
+        "model_probability_percent": 9.91719
+      },
+      {
+        "score": "1-1",
+        "model_probability_percent": 9.64915
+      },
+      {
+        "score": "2-0",
+        "model_probability_percent": 9.15432
+      },
+      {
+        "score": "1-0",
+        "model_probability_percent": 8.90691
+      },
+      {
+        "score": "3-1",
+        "model_probability_percent": 6.79511
+      },
+      {
+        "score": "3-0",
+        "model_probability_percent": 6.27241
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 5.37181
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 5.22662
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 4.69418
+      },
+      {
+        "score": "0-0",
+        "model_probability_percent": 4.33309
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  },
+  {
+    "home": "Sunderland",
+    "away": "A. Villa",
+    "observed": "2-3",
+    "prior_history_top10": [
+      {
+        "score": "1-1",
+        "model_probability_percent": 10.91228
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 10.16893
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 9.82743
+      },
+      {
+        "score": "0-2",
+        "model_probability_percent": 9.15799
+      },
+      {
+        "score": "1-0",
+        "model_probability_percent": 6.05844
+      },
+      {
+        "score": "1-3",
+        "model_probability_percent": 5.90029
+      },
+      {
+        "score": "2-1",
+        "model_probability_percent": 5.85498
+      },
+      {
+        "score": "0-0",
+        "model_probability_percent": 5.64574
+      },
+      {
+        "score": "0-3",
+        "model_probability_percent": 5.49836
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 5.27291
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  },
+  {
+    "home": "Wolverhampton",
+    "away": "C. Palace",
+    "observed": "1-2",
+    "prior_history_top10": [
+      {
+        "score": "1-1",
+        "model_probability_percent": 11.79023
+      },
+      {
+        "score": "1-0",
+        "model_probability_percent": 10.27867
+      },
+      {
+        "score": "2-1",
+        "model_probability_percent": 9.40136
+      },
+      {
+        "score": "2-0",
+        "model_probability_percent": 8.19606
+      },
+      {
+        "score": "0-1",
+        "model_probability_percent": 7.39306
+      },
+      {
+        "score": "1-2",
+        "model_probability_percent": 6.76205
+      },
+      {
+        "score": "0-0",
+        "model_probability_percent": 6.44523
+      },
+      {
+        "score": "2-2",
+        "model_probability_percent": 5.39196
+      },
+      {
+        "score": "3-1",
+        "model_probability_percent": 4.99767
+      },
+      {
+        "score": "3-0",
+        "model_probability_percent": 4.35695
+      }
+    ],
+    "mode": "HISTORICAL_REPLAY"
+  }
+]

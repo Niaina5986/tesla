@@ -1,0 +1,44 @@
+{
+  "0": {
+    "trials": 100000,
+    "hits": 8448,
+    "hit_rate_percent": 8.448,
+    "interpretation": "Taux de reconstruction dans cet échantillonnage de formules; pas une probabilité du score."
+  },
+  "1": {
+    "trials": 100000,
+    "hits": 18196,
+    "hit_rate_percent": 18.196,
+    "interpretation": "Taux de reconstruction dans cet échantillonnage de formules; pas une probabilité du score."
+  },
+  "2": {
+    "trials": 100000,
+    "hits": 7164,
+    "hit_rate_percent": 7.164,
+    "interpretation": "Taux de reconstruction dans cet échantillonnage de formules; pas une probabilité du score."
+  },
+  "3": {
+    "trials": 100000,
+    "hits": 6396,
+    "hit_rate_percent": 6.396,
+    "interpretation": "Taux de reconstruction dans cet échantillonnage de formules; pas une probabilité du score."
+  },
+  "4": {
+    "trials": 100000,
+    "hits": 5768,
+    "hit_rate_percent": 5.768,
+    "interpretation": "Taux de reconstruction dans cet échantillonnage de formules; pas une probabilité du score."
+  },
+  "5": {
+    "trials": 100000,
+    "hits": 5546,
+    "hit_rate_percent": 5.546,
+    "interpretation": "Taux de reconstruction dans cet échantillonnage de formules; pas une probabilité du score."
+  },
+  "6": {
+    "trials": 100000,
+    "hits": 5437,
+    "hit_rate_percent": 5.437,
+    "interpretation": "Taux de reconstruction dans cet échantillonnage de formules; pas une probabilité du score."
+  }
+}
