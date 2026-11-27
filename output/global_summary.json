@@ -1,10 +1,10 @@
 {
   "version": "TESLA_V7",
-  "generated_at": "2026-11-27T13:50:48.389312+00:00",
-  "elapsed_seconds": 6.845,
+  "generated_at": "2026-11-27T13:55:39.837672+00:00",
+  "elapsed_seconds": 5.361,
   "notification": {
-    "should_notify": false,
-    "reason": "WAITING_FOR_HOURLY_REPORT",
+    "should_notify": true,
+    "reason": "HOURLY_REPORT",
     "policy": "Analyze every 15 minutes; send a report every 3600 seconds"
   },
   "configuration": {
@@ -61,7 +61,7 @@
         "top3_percent": 26.1111,
         "top5_percent": 40.0
       },
-      "discovery_elapsed_seconds": 1.087,
+      "discovery_elapsed_seconds": 0.829,
       "discovery_targets": 7,
       "bfs_operations": 84000,
       "dfs_nodes": 167426,
