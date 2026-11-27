@@ -1,10 +1,10 @@
 {
   "version": "TESLA_V6",
-  "generated_at": "2026-11-27T13:26:25.431337+00:00",
-  "elapsed_seconds": 5.035,
+  "generated_at": "2026-11-27T13:45:00.239146+00:00",
+  "elapsed_seconds": 3.722,
   "notification": {
-    "should_notify": true,
-    "reason": "INITIAL_ANALYSIS",
+    "should_notify": false,
+    "reason": "NO_CHANGE",
     "policy": "Only on changed source data or changed discovery signature"
   },
   "configuration": {
@@ -61,7 +61,7 @@
         "top3_percent": 26.1111,
         "top5_percent": 40.0
       },
-      "discovery_elapsed_seconds": 0.806,
+      "discovery_elapsed_seconds": 0.631,
       "discovery_targets": 7,
       "bfs_operations": 84000,
       "dfs_nodes": 167426,
