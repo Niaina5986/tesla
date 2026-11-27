@@ -1,29 +1,16 @@
 # ============================================================
-# TESLA — REVERSE SCORE INTELLIGENCE
-# Version 1.0
-# Analyse inversée des scores de tournois virtuels
+# TESLA — REVERSE SCORE INTELLIGENCE V2
+# ============================================================
+# Reverse analysis of virtual football tournament scores
+# 37 rounds / 10 matches per round
 #
-# MOTEURS :
-# 1. Historical Engine
-# 2. Ranking Engine
-# 3. Goal Engine
-# 4. Form Engine
-# 5. Day Gap Engine
-# 6. Ricochet Engine
-# 7. BFS Engine
-# 8. DFS Engine
-# 9. RNG Pattern Detector
-# 10. Combination Engine
-# 11. Monte Carlo Engine
-# 12. Exact Score Engine
-# 13. Reverse Score Engine
-# 14. Backtesting Engine
-# 15. AI Learning Engine
+# ENGINES:
+# Historical, Ranking, Goal, Form, Day Gap,
+# Ricochet, BFS, DFS, RNG Detector, Monte Carlo,
+# Combination, Exact Score, Reverse Score,
+# Backtesting, Cross-Tournament Learning.
 #
-# IMPORTANT :
-# Chaque tournoi contient 37 journées.
-# Les résultats d'une journée ne servent jamais à calculer
-# les informations disponibles AVANT cette même journée.
+# TELEGRAM NOTIFICATIONS INCLUDED
 # ============================================================
 
 import os
@@ -33,8 +20,12 @@ import math
 import random
 import argparse
 import statistics
-from collections import Counter, defaultdict
-from datetime import datetime
+import urllib.request
+import urllib.parse
+import urllib.error
+
+from datetime import datetime, timezone
+from collections import Counter, defaultdict, deque
 
 try:
     import numpy as np
@@ -51,15 +42,22 @@ except ImportError:
 # CONFIGURATION
 # ============================================================
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+DATA_DIR = os.path.join(
+    BASE_DIR, "data", "tournaments"
+)
+
+OUTPUT_DIR = os.path.join(
+    BASE_DIR, "output"
+)
+
 ROUNDS = 37
 MATCHES_PER_ROUND = 10
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-DATA_DIR = os.path.join(BASE_DIR, "data", "tournaments")
-OUTPUT_DIR = os.path.join(BASE_DIR, "output")
-
-SIMULATIONS = int(os.getenv("TESLA_SIMULATIONS", "100000"))
+DEFAULT_SIMULATIONS = int(
+    os.getenv("TESLA_SIMULATIONS", "100000")
+)
 
 MAX_GRAPH_NODES = 40
 MAX_BFS_DEPTH = 5
@@ -72,24 +70,133 @@ random.seed(RANDOM_SEED)
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+TELEGRAM_TOKEN = os.getenv(
+    "TELEGRAM_BOT_TOKEN", ""
+)
+
+TELEGRAM_CHAT_ID = os.getenv(
+    "TELEGRAM_CHAT_ID", ""
+)
+
 
 # ============================================================
-# JSON UTILITIES
+# TELEGRAM ENGINE
+# ============================================================
+
+def telegram_send(message):
+
+    if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
+        print("[TELEGRAM] Credentials not configured.")
+        return False
+
+    url = (
+        f"https://api.telegram.org/bot"
+        f"{TELEGRAM_TOKEN}/sendMessage"
+    )
+
+    payload = {
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": message,
+        "disable_web_page_preview": True
+    }
+
+    data = urllib.parse.urlencode(
+        payload
+    ).encode("utf-8")
+
+    request = urllib.request.Request(
+        url,
+        data=data,
+        method="POST"
+    )
+
+    try:
+
+        with urllib.request.urlopen(
+            request,
+            timeout=30
+        ) as response:
+
+            result = json.loads(
+                response.read().decode("utf-8")
+            )
+
+            success = result.get("ok", False)
+
+            print(
+                "[TELEGRAM]",
+                "SENT" if success else "FAILED"
+            )
+
+            return success
+
+    except Exception as error:
+
+        print("[TELEGRAM ERROR]", str(error))
+
+        return False
+
+
+def telegram_send_long(message):
+
+    # Telegram limite un message à environ 4096 caractères.
+    limit = 3800
+
+    chunks = []
+
+    while len(message) > limit:
+
+        position = message.rfind(
+            "\n",
+            0,
+            limit
+        )
+
+        if position < 1:
+            position = limit
+
+        chunks.append(message[:position])
+
+        message = message[position:].lstrip()
+
+    if message:
+        chunks.append(message)
+
+    success = True
+
+    for chunk in chunks:
+
+        if not telegram_send(chunk):
+            success = False
+
+    return success
+
+
+# ============================================================
+# JSON ENGINE
 # ============================================================
 
 def save_json(filename, data):
 
-    path = os.path.join(OUTPUT_DIR, filename)
+    path = os.path.join(
+        OUTPUT_DIR,
+        filename
+    )
 
-    with open(path, "w", encoding="utf-8") as f:
+    with open(
+        path,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
         json.dump(
             data,
-            f,
+            file,
             indent=2,
             ensure_ascii=False
         )
 
-    print(f"[SAVED] {filename}")
+    print("[SAVED]", filename)
 
 
 def safe_float(value, default=0):
@@ -98,16 +205,6 @@ def safe_float(value, default=0):
         return float(value)
     except (ValueError, TypeError):
         return default
-
-
-def clamp(value, minimum, maximum):
-
-    return max(minimum, min(maximum, value))
-
-
-def normalize(value):
-
-    return str(value).strip()
 
 
 # ============================================================
@@ -120,11 +217,12 @@ ROUND_RE = re.compile(
 )
 
 SCORE_RE = re.compile(
-    r"^(.*?)\s+(\d+)\s*[-–:]\s*(\d+)\s+(.*?)$"
+    r"^(.+?)\s+(\d{1,2})\s*[-–:]\s*"
+    r"(\d{1,2})\s+(.+?)$"
 )
 
 
-def parse_text(text, tournament_name):
+def parse_text(text, tournament):
 
     matches = []
 
@@ -141,7 +239,10 @@ def parse_text(text, tournament_name):
 
         if round_match:
 
-            current_round = int(round_match.group(1))
+            current_round = int(
+                round_match.group(1)
+            )
+
             continue
 
         if current_round is None:
@@ -152,149 +253,156 @@ def parse_text(text, tournament_name):
         if not score_match:
             continue
 
-        home = normalize(score_match.group(1))
-        home_goals = int(score_match.group(2))
-        away_goals = int(score_match.group(3))
-        away = normalize(score_match.group(4))
+        home = score_match.group(1).strip()
+        hg = int(score_match.group(2))
+        ag = int(score_match.group(3))
+        away = score_match.group(4).strip()
 
         if not home or not away:
             continue
 
-        if home_goals > 30 or away_goals > 30:
+        if home.lower() == away.lower():
+            continue
+
+        if current_round < 1 or current_round > ROUNDS:
+            continue
+
+        if hg > 30 or ag > 30:
             continue
 
         matches.append({
 
-            "tournament": tournament_name,
-
+            "tournament": tournament,
             "round": current_round,
-
             "home": home,
-
             "away": away,
-
-            "home_goals": home_goals,
-
-            "away_goals": away_goals,
-
-            "score": f"{home_goals}-{away_goals}",
-
-            "total_goals": home_goals + away_goals,
-
-            "goal_difference": home_goals - away_goals
+            "home_goals": hg,
+            "away_goals": ag,
+            "score": f"{hg}-{ag}",
+            "total_goals": hg + ag,
+            "goal_difference": hg - ag
 
         })
 
     return matches
 
 
-def load_pdf(path):
+def read_input_file(path):
 
-    if PdfReader is None:
+    extension = os.path.splitext(path)[1].lower()
 
-        raise RuntimeError(
-            "pypdf absent. Installe-le avec : pip install pypdf"
+    if extension == ".pdf":
+
+        if PdfReader is None:
+            raise RuntimeError(
+                "pypdf is missing."
+            )
+
+        reader = PdfReader(path)
+
+        return "\n".join(
+            page.extract_text() or ""
+            for page in reader.pages
         )
 
-    reader = PdfReader(path)
+    if extension in (".txt", ".csv"):
 
-    text = "\n".join(
-        page.extract_text() or ""
-        for page in reader.pages
-    )
+        with open(
+            path,
+            "r",
+            encoding="utf-8-sig"
+        ) as file:
 
-    return text
+            return file.read()
 
-
-def load_text_file(path):
-
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
+    return None
 
 
 def load_tournaments():
 
     all_matches = []
 
-    if not os.path.exists(DATA_DIR):
-        return all_matches
+    for filename in sorted(
+        os.listdir(DATA_DIR)
+    ):
 
-    files = sorted(os.listdir(DATA_DIR))
-
-    for filename in files:
-
-        path = os.path.join(DATA_DIR, filename)
+        path = os.path.join(
+            DATA_DIR,
+            filename
+        )
 
         if not os.path.isfile(path):
             continue
 
-        ext = os.path.splitext(filename)[1].lower()
-
         try:
 
-            if ext == ".pdf":
-                text = load_pdf(path)
+            text = read_input_file(path)
 
-            elif ext in [".txt", ".csv"]:
-                text = load_text_file(path)
-
-            else:
+            if text is None:
                 continue
 
-            tournament_name = os.path.splitext(filename)[0]
+            tournament = os.path.splitext(
+                filename
+            )[0]
 
             matches = parse_text(
                 text,
-                tournament_name
+                tournament
             )
 
             print(
-                f"[IMPORT] {filename}: {len(matches)} matchs"
+                f"[IMPORT] {filename}: "
+                f"{len(matches)} matches"
             )
 
             all_matches.extend(matches)
 
-        except Exception as e:
+        except Exception as error:
 
-            print(f"[ERROR] {filename}: {e}")
+            print(
+                "[IMPORT ERROR]",
+                filename,
+                str(error)
+            )
 
     return all_matches
 
 
 # ============================================================
-# DATA VALIDATION
+# VALIDATION ENGINE
 # ============================================================
 
-def validate_tournaments(matches):
+def validate_data(matches):
 
     tournaments = defaultdict(list)
 
     for match in matches:
 
-        tournaments[match["tournament"]].append(match)
+        tournaments[
+            match["tournament"]
+        ].append(match)
 
     valid = []
 
     for name, games in tournaments.items():
 
-        rounds_found = Counter(
+        by_round = Counter(
             m["round"] for m in games
         )
 
-        print(f"\n[VALIDATION] {name}")
+        print("\n[VALIDATION]", name)
 
-        print("Nombre de matchs :", len(games))
-
-        print("Journées trouvées :", len(rounds_found))
+        print("Total:", len(games))
 
         for day in range(1, ROUNDS + 1):
 
-            count = rounds_found.get(day, 0)
+            count = by_round.get(day, 0)
 
             if count != MATCHES_PER_ROUND:
 
                 print(
-                    f"[WARNING] J{day}: {count}/10 matchs"
+                    f"[WARNING] J{day}: "
+                    f"{count}/10 matches"
                 )
 
         valid.extend(games)
@@ -303,44 +411,35 @@ def validate_tournaments(matches):
 
 
 # ============================================================
-# BASIC MATCH FEATURES
+# RESULT ENGINE
 # ============================================================
 
-def result_type(home_goals, away_goals):
+def result_type(hg, ag):
 
-    if home_goals > away_goals:
+    if hg > ag:
         return "HOME_WIN"
 
-    if home_goals < away_goals:
+    if hg < ag:
         return "AWAY_WIN"
 
     return "DRAW"
 
 
-def score_signature(home_goals, away_goals):
-
-    total = home_goals + away_goals
-
-    difference = abs(home_goals - away_goals)
+def score_signature(hg, ag):
 
     return {
 
-        "total": total,
+        "total": hg + ag,
 
-        "difference": difference,
+        "difference": abs(hg - ag),
 
-        "result": result_type(
-            home_goals,
-            away_goals
-        ),
+        "result": result_type(hg, ag),
 
-        "home_parity": home_goals % 2,
+        "home_parity": hg % 2,
 
-        "away_parity": away_goals % 2,
+        "away_parity": ag % 2,
 
-        "both_scored": (
-            home_goals > 0 and away_goals > 0
-        )
+        "both_scored": hg > 0 and ag > 0
 
     }
 
@@ -351,100 +450,97 @@ def score_signature(home_goals, away_goals):
 
 def build_ranking(previous_matches):
 
-    table = defaultdict(lambda: {
-
-        "played": 0,
-        "wins": 0,
-        "draws": 0,
-        "losses": 0,
-        "gf": 0,
-        "ga": 0,
-        "points": 0
-
-    })
+    table = defaultdict(
+        lambda: {
+            "played": 0,
+            "wins": 0,
+            "draws": 0,
+            "losses": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+        }
+    )
 
     for m in previous_matches:
 
-        home = m["home"]
-        away = m["away"]
+        home = table[m["home"]]
+        away = table[m["away"]]
 
         hg = m["home_goals"]
         ag = m["away_goals"]
 
-        h = table[home]
-        a = table[away]
+        home["played"] += 1
+        away["played"] += 1
 
-        h["played"] += 1
-        a["played"] += 1
+        home["gf"] += hg
+        home["ga"] += ag
 
-        h["gf"] += hg
-        h["ga"] += ag
-
-        a["gf"] += ag
-        a["ga"] += hg
+        away["gf"] += ag
+        away["ga"] += hg
 
         if hg > ag:
 
-            h["wins"] += 1
-            h["points"] += 3
+            home["wins"] += 1
+            home["points"] += 3
 
-            a["losses"] += 1
+            away["losses"] += 1
 
         elif hg < ag:
 
-            a["wins"] += 1
-            a["points"] += 3
+            away["wins"] += 1
+            away["points"] += 3
 
-            h["losses"] += 1
+            home["losses"] += 1
 
         else:
 
-            h["draws"] += 1
-            a["draws"] += 1
+            home["draws"] += 1
+            away["draws"] += 1
 
-            h["points"] += 1
-            a["points"] += 1
+            home["points"] += 1
+            away["points"] += 1
 
     ranking = {}
 
+    ordered = []
+
     for team, stats in table.items():
 
-        stats["gd"] = stats["gf"] - stats["ga"]
+        stats["gd"] = (
+            stats["gf"] - stats["ga"]
+        )
+
+        played = stats["played"]
 
         stats["goals_per_match"] = (
-            stats["gf"] / stats["played"]
-            if stats["played"] else 0
+            stats["gf"] / played
+            if played else 0
         )
 
         stats["conceded_per_match"] = (
-            stats["ga"] / stats["played"]
-            if stats["played"] else 0
+            stats["ga"] / played
+            if played else 0
         )
 
-        ranking[team] = dict(stats)
+        ordered.append((team, dict(stats)))
 
-    ordered = sorted(
-
-        ranking.items(),
-
+    ordered.sort(
         key=lambda x: (
-
             x[1]["points"],
             x[1]["gd"],
             x[1]["gf"]
-
         ),
-
         reverse=True
-
     )
 
     for position, (team, stats) in enumerate(
         ordered,
-        start=1
+        1
     ):
 
-        ranking[team]["position"] = position
+        stats["position"] = position
+        ranking[team] = stats
 
     return ranking
 
@@ -463,10 +559,10 @@ def team_history(team, previous_matches):
 
             history.append({
 
+                "round": m["round"],
                 "opponent": m["away"],
                 "gf": m["home_goals"],
                 "ga": m["away_goals"],
-                "round": m["round"],
                 "venue": "HOME"
 
             })
@@ -475,15 +571,18 @@ def team_history(team, previous_matches):
 
             history.append({
 
+                "round": m["round"],
                 "opponent": m["home"],
                 "gf": m["away_goals"],
                 "ga": m["home_goals"],
-                "round": m["round"],
                 "venue": "AWAY"
 
             })
 
-    return history
+    return sorted(
+        history,
+        key=lambda x: x["round"]
+    )
 
 
 def recent_form(team, previous_matches, limit=5):
@@ -491,38 +590,35 @@ def recent_form(team, previous_matches, limit=5):
     history = team_history(
         team,
         previous_matches
-    )
-
-    history = history[-limit:]
+    )[-limit:]
 
     points = 0
     gf = 0
     ga = 0
 
-    for m in history:
+    for match in history:
 
-        gf += m["gf"]
-        ga += m["ga"]
+        gf += match["gf"]
+        ga += match["ga"]
 
-        if m["gf"] > m["ga"]:
+        if match["gf"] > match["ga"]:
             points += 3
 
-        elif m["gf"] == m["ga"]:
+        elif match["gf"] == match["ga"]:
             points += 1
+
+    n = len(history)
 
     return {
 
-        "matches": len(history),
-
+        "matches": n,
         "points": points,
-
         "gf": gf,
-
         "ga": ga,
 
-        "average_gf": gf / len(history) if history else 0,
+        "average_gf": gf / n if n else 0,
 
-        "average_ga": ga / len(history) if history else 0
+        "average_ga": ga / n if n else 0
 
     }
 
@@ -531,7 +627,7 @@ def recent_form(team, previous_matches, limit=5):
 # DAY GAP ENGINE
 # ============================================================
 
-def last_match_round(team, previous_matches):
+def calculate_gap(team, current_round, previous_matches):
 
     rounds = [
 
@@ -543,87 +639,81 @@ def last_match_round(team, previous_matches):
 
     ]
 
-    return max(rounds) if rounds else None
-
-
-def calculate_gap(team, current_round, previous_matches):
-
-    last_round = last_match_round(
-        team,
-        previous_matches
-    )
-
-    if last_round is None:
+    if not rounds:
         return None
 
-    return current_round - last_round
+    return current_round - max(rounds)
 
 
 # ============================================================
-# FEATURE ENGINE
+# PRE-MATCH FEATURE ENGINE
 # ============================================================
 
 def match_features(match, previous_matches):
-
-    home = match["home"]
-    away = match["away"]
 
     ranking = build_ranking(
         previous_matches
     )
 
-    home_stats = ranking.get(home, {})
-    away_stats = ranking.get(away, {})
+    home = match["home"]
+    away = match["away"]
 
-    home_form = recent_form(
+    hs = ranking.get(home, {})
+    aws = ranking.get(away, {})
+
+    hf = recent_form(
         home,
         previous_matches
     )
 
-    away_form = recent_form(
+    af = recent_form(
         away,
         previous_matches
     )
 
     return {
 
-        "home_position": home_stats.get("position", 20),
+        "home_position": hs.get("position", 20),
 
-        "away_position": away_stats.get("position", 20),
+        "away_position": aws.get("position", 20),
 
         "points_difference": (
-            home_stats.get("points", 0)
-            - away_stats.get("points", 0)
+            hs.get("points", 0)
+            - aws.get("points", 0)
         ),
 
         "goal_difference_difference": (
-            home_stats.get("gd", 0)
-            - away_stats.get("gd", 0)
+            hs.get("gd", 0)
+            - aws.get("gd", 0)
         ),
 
-        "home_attack": home_stats.get(
+        "home_attack": hs.get(
             "goals_per_match", 0
         ),
 
-        "away_attack": away_stats.get(
+        "away_attack": aws.get(
             "goals_per_match", 0
         ),
 
-        "home_defence": home_stats.get(
+        "home_defence": hs.get(
             "conceded_per_match", 0
         ),
 
-        "away_defence": away_stats.get(
+        "away_defence": aws.get(
             "conceded_per_match", 0
         ),
 
-        "home_form_points": home_form["points"],
+        "home_form_points": hf["points"],
 
-        "away_form_points": away_form["points"],
+        "away_form_points": af["points"],
 
-        "home_form_gf": home_form["average_gf"],
+        "home_form_gf": hf["average_gf"],
 
-        "away_form_gf": away_form["average_gf"],
+        "away_form_gf": af["average_gf"],
+
+        "home_form_ga": hf["average_ga"],
+
+        "away_form_ga": af["average_ga"],
 
         "home_gap": calculate_gap(
             home,
@@ -641,23 +731,118 @@ def match_features(match, previous_matches):
 
 
 # ============================================================
-# HISTORICAL SCORE DATABASE
+# HISTORICAL FEATURE RECONSTRUCTION
 # ============================================================
 
-def build_history_database(matches):
+def enrich_historical_matches(previous_matches):
 
-    database = defaultdict(list)
+    enriched = []
 
-    for m in matches:
+    by_tournament = defaultdict(list)
 
-        key = (
-            m["home"],
-            m["away"]
+    for m in previous_matches:
+
+        by_tournament[
+            m["tournament"]
+        ].append(m)
+
+    for historical_match in previous_matches:
+
+        same_tournament = by_tournament[
+            historical_match["tournament"]
+        ]
+
+        before = [
+
+            m for m in same_tournament
+
+            if m["round"] < historical_match["round"]
+
+        ]
+
+        copy = dict(historical_match)
+
+        copy["features"] = match_features(
+            historical_match,
+            before
         )
 
-        database[key].append(m)
+        enriched.append(copy)
 
-    return dict(database)
+    return enriched
+
+
+# ============================================================
+# DISTANCE ENGINE
+# ============================================================
+
+FEATURE_SCALES = {
+
+    "home_position": 20,
+    "away_position": 20,
+    "points_difference": 100,
+    "goal_difference_difference": 60,
+    "home_attack": 5,
+    "away_attack": 5,
+    "home_defence": 5,
+    "away_defence": 5,
+    "home_form_points": 15,
+    "away_form_points": 15,
+    "home_form_gf": 5,
+    "away_form_gf": 5,
+    "home_form_ga": 5,
+    "away_form_ga": 5,
+    "home_gap": 10,
+    "away_gap": 10
+
+}
+
+
+def feature_distance(a, b):
+
+    fa = a.get("features", {})
+    fb = b.get("features", {})
+
+    distance = 0
+    used = 0
+
+    for key, scale in FEATURE_SCALES.items():
+
+        va = fa.get(key)
+        vb = fb.get(key)
+
+        if va is None or vb is None:
+            continue
+
+        distance += (
+            abs(
+                safe_float(va) - safe_float(vb)
+            ) / scale
+        )
+
+        used += 1
+
+    return (
+        distance / used
+        if used else 999
+    )
+
+
+def score_distance(a, b):
+
+    return (
+
+        abs(
+            a["home_goals"] - b["home_goals"]
+        )
+
+        +
+
+        abs(
+            a["away_goals"] - b["away_goals"]
+        )
+
+    )
 
 
 # ============================================================
@@ -670,7 +855,7 @@ def ricochet_search(target, previous_matches):
     ag = target["away_goals"]
 
     total = hg + ag
-    difference = hg - ag
+    difference = abs(hg - ag)
 
     exact = []
     inverted = []
@@ -692,7 +877,7 @@ def ricochet_search(target, previous_matches):
         if x + y == total:
             same_total.append(m)
 
-        if abs(x - y) == abs(difference):
+        if abs(x - y) == difference:
             same_difference.append(m)
 
         if result_type(x, y) == result_type(hg, ag):
@@ -700,11 +885,11 @@ def ricochet_search(target, previous_matches):
 
     return {
 
-        "target_score": target["score"],
+        "target": target["score"],
 
-        "exact_matches": exact,
+        "exact": exact,
 
-        "inverted_matches": inverted,
+        "inverted": inverted,
 
         "same_total": same_total,
 
@@ -730,82 +915,96 @@ def ricochet_search(target, previous_matches):
 
 
 # ============================================================
-# GRAPH SIMILARITY ENGINE
+# COMBINATION ENGINE
 # ============================================================
 
-def score_distance(a, b):
+def combination_analysis(target, previous_matches):
 
-    return (
-
-        abs(a["home_goals"] - b["home_goals"])
-
-        +
-
-        abs(a["away_goals"] - b["away_goals"])
-
+    target_signature = score_signature(
+        target["home_goals"],
+        target["away_goals"]
     )
 
-
-def feature_distance(a, b):
-
-    fa = a.get("features", {})
-    fb = b.get("features", {})
-
-    keys = [
-
-        "home_position",
-        "away_position",
-        "points_difference",
-        "goal_difference_difference",
-        "home_attack",
-        "away_attack",
-        "home_defence",
-        "away_defence",
-        "home_form_points",
-        "away_form_points"
-
-    ]
-
-    distance = 0
-
-    for key in keys:
-
-        distance += abs(
-            safe_float(fa.get(key))
-            - safe_float(fb.get(key))
-        )
-
-    return distance
-
-
-def build_similarity_graph(target, previous_matches):
-
-    candidates = []
+    related = []
 
     for m in previous_matches:
 
-        distance = score_distance(
+        signature = score_signature(
+            m["home_goals"],
+            m["away_goals"]
+        )
+
+        similarities = []
+
+        for key in (
+            "total",
+            "difference",
+            "result",
+            "both_scored"
+        ):
+
+            if signature[key] == target_signature[key]:
+
+                similarities.append(key)
+
+        if similarities:
+
+            related.append({
+
+                "match": m,
+
+                "similarities": similarities,
+
+                "similarity_count": len(similarities)
+
+            })
+
+    related.sort(
+        key=lambda x: x["similarity_count"],
+        reverse=True
+    )
+
+    return related
+
+
+# ============================================================
+# GRAPH ENGINE
+# ============================================================
+
+def build_similarity_graph(target, history):
+
+    candidates = []
+
+    for m in history:
+
+        distance = feature_distance(
             target,
             m
         )
 
-        feature_diff = feature_distance(
+        score_diff = score_distance(
             target,
             m
+        )
+
+        # Historical reverse analysis:
+        # score distance is included to identify similar
+        # historical outcomes, not to claim prediction.
+
+        weight = (
+            distance * 0.75
+            + score_diff * 0.25
         )
 
         candidates.append({
 
             "match": m,
 
-            "score_distance": distance,
+            "feature_distance": distance,
 
-            "feature_distance": feature_diff,
+            "score_distance": score_diff,
 
-            "weight": (
-                distance * 1.0
-                + feature_diff * 0.25
-            )
+            "weight": weight
 
         })
 
@@ -813,37 +1012,39 @@ def build_similarity_graph(target, previous_matches):
         key=lambda x: x["weight"]
     )
 
-    selected = candidates[:MAX_GRAPH_NODES]
+    nodes = candidates[:MAX_GRAPH_NODES]
 
     graph = defaultdict(list)
 
-    for i in range(len(selected)):
+    for i in range(len(nodes)):
 
-        for j in range(i + 1, len(selected)):
+        for j in range(i + 1, len(nodes)):
 
-            a = selected[i]["match"]
-            b = selected[j]["match"]
+            a = nodes[i]["match"]
+            b = nodes[j]["match"]
 
-            d = score_distance(a, b)
+            fd = feature_distance(a, b)
 
-            if d <= 2:
+            sd = score_distance(a, b)
+
+            if fd <= 0.35 or sd <= 1:
 
                 graph[i].append(j)
                 graph[j].append(i)
 
-    return selected, graph
+    return nodes, graph
 
 
 # ============================================================
 # BFS ENGINE
 # ============================================================
 
-def bfs_search(nodes, graph, max_depth=MAX_BFS_DEPTH):
+def bfs_search(nodes, graph):
 
     if not nodes:
         return []
 
-    queue = [(0, 0)]
+    queue = deque([(0, 0)])
 
     visited = set()
 
@@ -851,7 +1052,7 @@ def bfs_search(nodes, graph, max_depth=MAX_BFS_DEPTH):
 
     while queue:
 
-        node, depth = queue.pop(0)
+        node, depth = queue.popleft()
 
         if node in visited:
             continue
@@ -859,8 +1060,6 @@ def bfs_search(nodes, graph, max_depth=MAX_BFS_DEPTH):
         visited.add(node)
 
         results.append({
-
-            "node": node,
 
             "depth": depth,
 
@@ -870,7 +1069,7 @@ def bfs_search(nodes, graph, max_depth=MAX_BFS_DEPTH):
 
         })
 
-        if depth >= max_depth:
+        if depth >= MAX_BFS_DEPTH:
             continue
 
         for neighbor in graph[node]:
@@ -888,7 +1087,7 @@ def bfs_search(nodes, graph, max_depth=MAX_BFS_DEPTH):
 # DFS ENGINE
 # ============================================================
 
-def dfs_search(nodes, graph, max_depth=MAX_DFS_DEPTH):
+def dfs_search(nodes, graph):
 
     if not nodes:
         return []
@@ -910,8 +1109,6 @@ def dfs_search(nodes, graph, max_depth=MAX_DFS_DEPTH):
 
         results.append({
 
-            "node": node,
-
             "depth": depth,
 
             "match": nodes[node]["match"],
@@ -920,10 +1117,10 @@ def dfs_search(nodes, graph, max_depth=MAX_DFS_DEPTH):
 
         })
 
-        if depth >= max_depth:
+        if depth >= MAX_DFS_DEPTH:
             continue
 
-        for neighbor in reversed(graph[node]):
+        for neighbor in graph[node]:
 
             if neighbor not in visited:
 
@@ -935,13 +1132,12 @@ def dfs_search(nodes, graph, max_depth=MAX_DFS_DEPTH):
 
 
 # ============================================================
-# RNG PATTERN DETECTOR
+# RNG DETECTOR
 # ============================================================
 
 def rng_analysis(matches):
 
     if not matches:
-
         return {}
 
     scores = Counter(
@@ -953,38 +1149,21 @@ def rng_analysis(matches):
     )
 
     results = Counter(
+
         result_type(
             m["home_goals"],
             m["away_goals"]
         )
+
         for m in matches
+
     )
 
-    exact_repetitions = {
-
-        score: count
-
-        for score, count in scores.items()
-
-        if count > 1
-
-    }
-
-    repeated_totals = {
-
-        total: count
-
-        for total, count in totals.items()
-
-        if count > 1
-
-    }
-
-    home_scores = [
+    home_goals = [
         m["home_goals"] for m in matches
     ]
 
-    away_scores = [
+    away_goals = [
         m["away_goals"] for m in matches
     ]
 
@@ -998,159 +1177,87 @@ def rng_analysis(matches):
 
         "result_frequency": dict(results),
 
-        "repeated_exact_scores": exact_repetitions,
+        "repeated_scores": {
 
-        "repeated_goal_totals": repeated_totals,
+            score: count
+
+            for score, count in scores.items()
+
+            if count > 1
+
+        },
 
         "average_home_goals": statistics.mean(
-            home_scores
+            home_goals
         ),
 
         "average_away_goals": statistics.mean(
-            away_scores
+            away_goals
         ),
 
         "home_goals_variance": statistics.pvariance(
-            home_scores
+            home_goals
         ),
 
         "away_goals_variance": statistics.pvariance(
-            away_scores
+            away_goals
         )
 
     }
 
 
 # ============================================================
-# COMBINATION ENGINE
-# ============================================================
-
-def combination_analysis(target, previous_matches):
-
-    signature = score_signature(
-
-        target["home_goals"],
-        target["away_goals"]
-
-    )
-
-    related = []
-
-    for m in previous_matches:
-
-        s = score_signature(
-
-            m["home_goals"],
-            m["away_goals"]
-
-        )
-
-        similarities = []
-
-        if s["total"] == signature["total"]:
-            similarities.append("SAME_TOTAL")
-
-        if s["difference"] == signature["difference"]:
-            similarities.append("SAME_DIFFERENCE")
-
-        if s["result"] == signature["result"]:
-            similarities.append("SAME_RESULT")
-
-        if s["both_scored"] == signature["both_scored"]:
-            similarities.append("BOTH_SCORED_PATTERN")
-
-        if similarities:
-
-            related.append({
-
-                "match": m,
-
-                "similarities": similarities,
-
-                "similarity_count": len(similarities)
-
-            })
-
-    related.sort(
-
-        key=lambda x: x["similarity_count"],
-
-        reverse=True
-
-    )
-
-    return related
-
-
-# ============================================================
 # MONTE CARLO ENGINE
 # ============================================================
 
-def monte_carlo(target, previous_matches, simulations):
+def monte_carlo(target, historical_matches, simulations):
 
-    if not previous_matches:
+    if not historical_matches:
 
         return {
             "simulations": 0,
-            "score_frequency": {},
-            "message": "Insufficient history"
+            "top_scores": []
         }
 
-    # Les scores historiques servent de distribution empirique.
-    # Le poids est basé sur la proximité des caractéristiques
-    # pré-match et non sur le résultat futur du match cible.
+    # IMPORTANT:
+    # The weighting uses pre-match features only.
+    # The known target score is NOT used to weight
+    # historical analogues in this engine.
 
-    candidates = []
+    weights = []
 
-    for m in previous_matches:
+    scores = []
 
-        score_diff = score_distance(
-            target,
-            m
-        )
+    for m in historical_matches:
 
-        feature_diff = feature_distance(
+        distance = feature_distance(
             target,
             m
         )
 
         weight = 1.0 / (
-            1.0
-            + score_diff
-            + feature_diff * 0.10
+            0.05 + distance
         )
 
-        candidates.append((m, weight))
+        weights.append(weight)
 
-    weights = [
-        item[1] for item in candidates
-    ]
-
-    total_weight = sum(weights)
-
-    if total_weight <= 0:
-
-        weights = [1.0] * len(candidates)
-        total_weight = len(candidates)
-
-    probabilities = [
-        w / total_weight for w in weights
-    ]
-
-    scores = [
-        m["score"] for m, _ in candidates
-    ]
+        scores.append(m["score"])
 
     if np is not None:
 
-        sampled = np.random.default_rng().choice(
+        rng = np.random.default_rng()
 
+        probabilities = np.array(
+            weights,
+            dtype=float
+        )
+
+        probabilities /= probabilities.sum()
+
+        sampled = rng.choice(
             scores,
-
             size=simulations,
-
             p=probabilities
-
         )
 
         frequency = Counter(
@@ -1162,20 +1269,20 @@ def monte_carlo(target, previous_matches, simulations):
         frequency = Counter(
             random.choices(
                 scores,
-                weights=probabilities,
+                weights=weights,
                 k=simulations
             )
         )
 
-    ranked = frequency.most_common(20)
+    top = frequency.most_common(15)
 
     return {
 
         "simulations": simulations,
 
-        "historical_sample": len(previous_matches),
-
-        "score_frequency": dict(frequency),
+        "historical_sample": len(
+            historical_matches
+        ),
 
         "top_scores": [
 
@@ -1185,22 +1292,20 @@ def monte_carlo(target, previous_matches, simulations):
 
                 "count": count,
 
-                "frequency_percent": (
-                    count / simulations * 100
+                "frequency_percent": round(
+                    count / simulations * 100,
+                    4
                 )
 
             }
 
-            for score, count in ranked
+            for score, count in top
 
         ],
 
         "method": "Weighted empirical bootstrap",
 
-        "interpretation": (
-            "Frequencies of simulated historical analogues; "
-            "not probabilities of a hidden RNG outcome."
-        )
+        "weighting": "Pre-match feature similarity only"
 
     }
 
@@ -1211,113 +1316,64 @@ def monte_carlo(target, previous_matches, simulations):
 
 def exact_score_analysis(target, previous_matches):
 
-    scores = Counter(
+    frequencies = Counter(
         m["score"] for m in previous_matches
     )
 
     total = len(previous_matches)
 
-    ranked = scores.most_common(20)
+    count = frequencies.get(
+        target["score"],
+        0
+    )
 
     return {
 
         "target_score": target["score"],
 
-        "historical_occurrences": scores.get(
-            target["score"], 0
-        ),
+        "occurrences": count,
 
-        "historical_sample": total,
+        "sample_size": total,
 
-        "historical_frequency_percent": (
+        "frequency_percent": round(
+            count / total * 100,
+            3
+        ) if total else 0,
 
-            scores.get(target["score"], 0)
-            / total * 100
-
-            if total else 0
-
-        ),
-
-        "most_common_scores": [
-
-            {
-
-                "score": score,
-
-                "count": count,
-
-                "frequency_percent": (
-                    count / total * 100
-                ) if total else 0
-
-            }
-
-            for score, count in ranked
-
-        ]
+        "top_scores": frequencies.most_common(15)
 
     }
 
 
 # ============================================================
-# REVERSE SCORE ENGINE
+# REVERSE ANALYSIS ENGINE
 # ============================================================
 
 def reverse_analysis(target, previous_matches):
-
-    print(
-        f"\n[REVERSE] J{target['round']} "
-        f"{target['home']} {target['score']} "
-        f"{target['away']}"
-    )
 
     features = match_features(
         target,
         previous_matches
     )
 
-    target_with_features = dict(target)
+    target_enriched = dict(target)
 
-    target_with_features["features"] = features
+    target_enriched["features"] = features
 
-    historical = team_history(
-        target["home"],
+    # Reconstruct every old match with information
+    # available before its own round.
+
+    enriched_history = enrich_historical_matches(
         previous_matches
     )
 
-    away_historical = team_history(
-        target["away"],
-        previous_matches
-    )
-
-    ricochet = ricochet_search(
-        target,
-        previous_matches
-    )
-
-    combinations = combination_analysis(
-        target,
+    ranking = build_ranking(
         previous_matches
     )
 
     nodes, graph = build_similarity_graph(
-        target_with_features,
-        previous_matches
-    )
-
-    bfs = bfs_search(
-        nodes,
-        graph
-    )
-
-    dfs = dfs_search(
-        nodes,
-        graph
-    )
-
-    exact = exact_score_analysis(
-        target,
-        previous_matches
+        target_enriched,
+        enriched_history
     )
 
     return {
@@ -1326,46 +1382,65 @@ def reverse_analysis(target, previous_matches):
 
         "pre_match_features": features,
 
-        "home_history": historical,
+        "ranking_before": ranking,
 
-        "away_history": away_historical,
-
-        "ranking_before_match": build_ranking(
+        "home_history": team_history(
+            target["home"],
             previous_matches
         ),
 
-        "ricochet": ricochet,
+        "away_history": team_history(
+            target["away"],
+            previous_matches
+        ),
 
-        "combinations": combinations,
+        "ricochet": ricochet_search(
+            target,
+            previous_matches
+        ),
 
-        "bfs": bfs,
+        "combinations": combination_analysis(
+            target,
+            previous_matches
+        ),
 
-        "dfs": dfs,
+        "bfs": bfs_search(
+            nodes,
+            graph
+        ),
 
-        "exact_score": exact
+        "dfs": dfs_search(
+            nodes,
+            graph
+        ),
+
+        "exact_score": exact_score_analysis(
+            target,
+            previous_matches
+        ),
+
+        "historical_comparisons": enriched_history
 
     }
 
 
 # ============================================================
-# BACKTESTING ENGINE
+# BACKTEST ENGINE
 # ============================================================
 
 def backtest(matches):
 
-    correct_exact = 0
-
-    total = 0
-
-    score_frequency = Counter()
-
     records = []
+
+    correct = 0
+
+    tested = 0
 
     for tournament in sorted(
         set(m["tournament"] for m in matches)
     ):
 
-        tournament_matches = [
+        games = [
 
             m for m in matches
 
@@ -1373,11 +1448,11 @@ def backtest(matches):
 
         ]
 
-        for day in range(1, ROUNDS + 1):
+        for day in range(2, ROUNDS + 1):
 
             previous = [
 
-                m for m in tournament_matches
+                m for m in games
 
                 if m["round"] < day
 
@@ -1385,42 +1460,34 @@ def backtest(matches):
 
             current = [
 
-                m for m in tournament_matches
+                m for m in games
 
                 if m["round"] == day
 
             ]
 
+            if not previous:
+                continue
+
+            frequencies = Counter(
+                m["score"] for m in previous
+            )
+
+            if not frequencies:
+                continue
+
+            predicted = frequencies.most_common(1)[0][0]
+
             for target in current:
 
-                if not previous:
-                    continue
+                actual = target["score"]
 
-                historical_scores = Counter(
-                    m["score"] for m in previous
-                )
+                exact = predicted == actual
 
-                if not historical_scores:
-                    continue
+                if exact:
+                    correct += 1
 
-                predicted_score = (
-                    historical_scores.most_common(1)[0][0]
-                )
-
-                actual_score = target["score"]
-
-                correct = (
-                    predicted_score == actual_score
-                )
-
-                if correct:
-                    correct_exact += 1
-
-                total += 1
-
-                score_frequency[
-                    predicted_score
-                ] += 1
+                tested += 1
 
                 records.append({
 
@@ -1428,17 +1495,15 @@ def backtest(matches):
 
                     "round": day,
 
-                    "match": (
-                        target["home"]
-                        + " vs "
-                        + target["away"]
-                    ),
+                    "home": target["home"],
 
-                    "predicted": predicted_score,
+                    "away": target["away"],
 
-                    "actual": actual_score,
+                    "predicted": predicted,
 
-                    "exact_correct": correct
+                    "actual": actual,
+
+                    "exact_correct": exact
 
                 })
 
@@ -1446,17 +1511,14 @@ def backtest(matches):
 
         "method": "Walk-forward historical majority baseline",
 
-        "tested_matches": total,
+        "tested": tested,
 
-        "exact_correct": correct_exact,
+        "exact_correct": correct,
 
-        "exact_accuracy_percent": (
-
-            correct_exact / total * 100
-
-            if total else 0
-
-        ),
+        "accuracy_percent": round(
+            correct / tested * 100,
+            3
+        ) if tested else 0,
 
         "records": records
 
@@ -1464,20 +1526,92 @@ def backtest(matches):
 
 
 # ============================================================
-# AI LEARNING ENGINE
+# CROSS-TOURNAMENT LEARNING
+# ============================================================
+
+def cross_tournament_analysis(matches):
+
+    tournaments = sorted(
+        set(m["tournament"] for m in matches)
+    )
+
+    results = {}
+
+    for test_tournament in tournaments:
+
+        training = [
+
+            m for m in matches
+
+            if m["tournament"] != test_tournament
+
+        ]
+
+        testing = [
+
+            m for m in matches
+
+            if m["tournament"] == test_tournament
+
+        ]
+
+        training_scores = Counter(
+            m["score"] for m in training
+        )
+
+        most_common = (
+
+            training_scores.most_common(1)[0][0]
+
+            if training_scores else None
+
+        )
+
+        correct = sum(
+
+            1 for m in testing
+
+            if m["score"] == most_common
+
+        )
+
+        results[test_tournament] = {
+
+            "training_tournaments": len(
+                tournaments
+            ) - 1,
+
+            "testing_matches": len(testing),
+
+            "training_most_common_score": most_common,
+
+            "matches_equal_to_training_mode": correct,
+
+            "frequency_percent": round(
+                correct / len(testing) * 100,
+                3
+            ) if testing else 0
+
+        }
+
+    return results
+
+
+# ============================================================
+# GLOBAL LEARNING
 # ============================================================
 
 def learning_analysis(matches):
 
-    score_counts = Counter(
+    scores = Counter(
         m["score"] for m in matches
     )
 
-    total_counts = Counter(
+    totals = Counter(
         m["total_goals"] for m in matches
     )
 
-    result_counts = Counter(
+    outcomes = Counter(
 
         result_type(
             m["home_goals"],
@@ -1492,25 +1626,17 @@ def learning_analysis(matches):
 
         "training_matches": len(matches),
 
-        "score_patterns": dict(score_counts),
+        "score_frequency": dict(scores),
 
-        "goal_total_patterns": dict(total_counts),
+        "total_frequency": dict(totals),
 
-        "result_patterns": dict(result_counts),
+        "outcome_frequency": dict(outcomes),
 
-        "most_frequent_score": (
+        "most_common_score": (
 
-            score_counts.most_common(1)[0][0]
+            scores.most_common(1)[0][0]
 
-            if score_counts else None
-
-        ),
-
-        "most_frequent_total": (
-
-            total_counts.most_common(1)[0][0]
-
-            if total_counts else None
+            if scores else None
 
         )
 
@@ -1518,43 +1644,195 @@ def learning_analysis(matches):
 
 
 # ============================================================
-# MAIN ANALYSIS
+# TELEGRAM REPORT
 # ============================================================
 
-def run_analysis(simulations=SIMULATIONS):
+def build_telegram_report(
+    tournaments,
+    total_matches,
+    performance,
+    rng,
+    monte_carlo_results,
+    simulations
+):
+
+    now = datetime.now(
+        timezone.utc
+    ).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    lines = [
+
+        "━━━━━━━━━━━━━━━━━━━━",
+        "🧠 TESLA REVERSE INTELLIGENCE",
+        "━━━━━━━━━━━━━━━━━━━━",
+
+        f"📅 {now}",
+
+        "",
+
+        "📊 DONNÉES",
+
+        f"🏆 Tournois : {tournaments}",
+
+        f"⚽ Matchs analysés : {total_matches}",
+
+        f"🔢 Journées : J1 à J37",
+
+        "",
+
+        "🔬 MOTEURS ACTIVÉS",
+
+        "✅ Historical Engine",
+
+        "✅ Ranking Engine",
+
+        "✅ Goal & Form Engine",
+
+        "✅ Ricochet Engine",
+
+        "✅ BFS / DFS",
+
+        "✅ RNG Detector",
+
+        "✅ Monte Carlo",
+
+        "✅ Reverse Score Engine",
+
+        "✅ Backtesting",
+
+        "",
+
+        "🎲 MONTE CARLO",
+
+        f"Simulations par match ciblé : {simulations}",
+
+        "",
+
+        "📈 BACKTEST",
+
+        f"Matchs testés : {performance['tested']}",
+
+        f"Scores exacts : {performance['exact_correct']}",
+
+        (
+            "Fréquence exacte de la baseline : "
+            f"{performance['accuracy_percent']}%"
+        ),
+
+        "",
+
+        "🧪 DISTRIBUTION HISTORIQUE",
+
+        f"Scores distincts : {len(rng.get('score_frequency', {}))}",
+
+        (
+            "Moyenne buts domicile : "
+            f"{rng.get('average_home_goals', 0):.3f}"
+        ),
+
+        (
+            "Moyenne buts extérieur : "
+            f"{rng.get('average_away_goals', 0):.3f}"
+        ),
+
+        "",
+
+        "📁 Fichiers JSON disponibles dans output/",
+
+        "━━━━━━━━━━━━━━━━━━━━",
+
+        "TESLA ANALYSIS FINISHED"
+
+    ]
+
+    if monte_carlo_results:
+
+        lines.extend([
+
+            "",
+
+            "🎯 TOP MONTE CARLO"
+
+        ])
+
+        for item in monte_carlo_results[:5]:
+
+            match = item["match"]
+
+            top = item["monte_carlo"].get(
+                "top_scores", []
+            )
+
+            lines.append(
+
+                f"{match['tournament']} J{match['round']} "
+                f"{match['home']} vs {match['away']} "
+                f"| résultat {match['score']}"
+
+            )
+
+            for prediction in top[:3]:
+
+                lines.append(
+
+                    f"  • {prediction['score']} : "
+                    f"{prediction['frequency_percent']}%"
+
+                )
+
+    return "\n".join(lines)
+
+
+# ============================================================
+# MAIN ENGINE
+# ============================================================
+
+def run_analysis(simulations):
 
     print("\n")
     print("=" * 60)
-    print("TESLA — REVERSE SCORE INTELLIGENCE")
+    print("TESLA REVERSE SCORE INTELLIGENCE V2")
     print("=" * 60)
+
+    telegram_send(
+        "🚀 TESLA REVERSE INTELLIGENCE\n"
+        "Analyse démarrée.\n"
+        "Chargement des tournois..."
+    )
 
     matches = load_tournaments()
 
     if not matches:
 
-        print(
-            "\nAucun résultat trouvé dans data/tournaments/"
+        message = (
+            "❌ TESLA ERROR\n"
+            "Aucun résultat trouvé.\n"
+            "Vérifie data/tournaments/."
         )
+
+        print(message)
+        telegram_send(message)
 
         return
 
-    matches = validate_tournaments(matches)
+    matches = validate_data(matches)
 
     if not matches:
+        telegram_send("❌ Aucun match valide.")
         return
 
-    # Trier chronologiquement
     matches.sort(
-
         key=lambda m: (
-
             m["tournament"],
             m["round"]
-
         )
-
     )
 
+    tournaments = sorted(
+        set(m["tournament"] for m in matches)
+    )
+
+    # Save original historical data
     save_json(
         "history.json",
         matches
@@ -1562,23 +1840,21 @@ def run_analysis(simulations=SIMULATIONS):
 
     reverse_results = []
 
-    ricochet_database = []
+    ricochet_results = []
 
-    prediction_database = []
+    monte_carlo_results = []
 
-    ranking_database = {}
+    ranking_results = {}
 
-    rng_database = {}
+    rng_results = {}
 
     # --------------------------------------------------------
-    # WALK-FORWARD ANALYSIS
+    # WALK-FORWARD REVERSE ANALYSIS
     # --------------------------------------------------------
 
-    for tournament in sorted(
-        set(m["tournament"] for m in matches)
-    ):
+    for tournament in tournaments:
 
-        tournament_matches = [
+        games = [
 
             m for m in matches
 
@@ -1594,7 +1870,7 @@ def run_analysis(simulations=SIMULATIONS):
 
             previous = [
 
-                m for m in tournament_matches
+                m for m in games
 
                 if m["round"] < day
 
@@ -1602,7 +1878,7 @@ def run_analysis(simulations=SIMULATIONS):
 
             current = [
 
-                m for m in tournament_matches
+                m for m in games
 
                 if m["round"] == day
 
@@ -1611,16 +1887,9 @@ def run_analysis(simulations=SIMULATIONS):
             if not current:
                 continue
 
-            ranking = build_ranking(
-                previous
-            )
-
-            ranking_database[
+            ranking_results[
                 f"{tournament}_J{day}"
-            ] = ranking
-
-            # Tous les matchs d'une journée sont traités
-            # avec les mêmes informations préalables.
+            ] = build_ranking(previous)
 
             for target in current:
 
@@ -1633,7 +1902,7 @@ def run_analysis(simulations=SIMULATIONS):
                     analysis
                 )
 
-                ricochet_database.append({
+                ricochet_results.append({
 
                     "tournament": tournament,
 
@@ -1645,26 +1914,35 @@ def run_analysis(simulations=SIMULATIONS):
 
                 })
 
-                # Monte Carlo uniquement sur les trois
-                # dernières journées pour limiter le coût.
+                # Monte Carlo on J35, J36 and J37.
+                # The target match score is not used
+                # to weight historical candidates.
 
                 if day >= 35 and previous:
 
+                    target_for_mc = {
+
+                        **target,
+
+                        "features": analysis[
+                            "pre_match_features"
+                        ]
+
+                    }
+
                     mc = monte_carlo(
 
-                        analysis["match"],
+                        target_for_mc,
 
-                        previous,
+                        analysis[
+                            "historical_comparisons"
+                        ],
 
                         simulations
 
                     )
 
-                    prediction_database.append({
-
-                        "tournament": tournament,
-
-                        "round": day,
+                    monte_carlo_results.append({
 
                         "match": target,
 
@@ -1673,136 +1951,15 @@ def run_analysis(simulations=SIMULATIONS):
                     })
 
             print(
-                f"[DONE] {tournament} J{day} "
-                f"| {len(current)} matchs"
+                f"[DONE] {tournament} J{day}"
             )
 
-    # --------------------------------------------------------
-    # GLOBAL ANALYSIS
-    # --------------------------------------------------------
-
-    global_rng = rng_analysis(matches)
-
-    learning = learning_analysis(matches)
-
-    performance = backtest(matches)
-
-    models = {
-
-        "created_at": datetime.utcnow().isoformat(),
-
-        "tournaments": len(
-            set(m["tournament"] for m in matches)
-        ),
-
-        "rounds_per_tournament": ROUNDS,
-
-        "total_matches": len(matches),
-
-        "learning": learning,
-
-        "rng_analysis": global_rng
-
-    }
+        rng_results[tournament] = rng_analysis(
+            games
+        )
 
     # --------------------------------------------------------
-    # SAVE EVERYTHING
+    # GLOBAL ENGINES
     # --------------------------------------------------------
 
-    save_json(
-        "reverse_analysis.json",
-        reverse_results
-    )
-
-    save_json(
-        "ranking.json",
-        ranking_database
-    )
-
-    save_json(
-        "ricochet.json",
-        ricochet_database
-    )
-
-    save_json(
-        "predictions.json",
-        prediction_database
-    )
-
-    save_json(
-        "rng_database.json",
-        global_rng
-    )
-
-    save_json(
-        "models.json",
-        models
-    )
-
-    save_json(
-        "performance.json",
-        performance
-    )
-
-    # --------------------------------------------------------
-    # FINAL REPORT
-    # --------------------------------------------------------
-
-    print("\n")
-    print("=" * 60)
-    print("TESLA — ANALYSIS TERMINÉE")
-    print("=" * 60)
-
-    print("Tournois :", models["tournaments"])
-
-    print("Matchs :", len(matches))
-
-    print(
-        "Simulations Monte Carlo :",
-        simulations
-    )
-
-    print(
-        "Backtests :",
-        performance["tested_matches"]
-    )
-
-    print(
-        "Exact score baseline :",
-        round(
-            performance["exact_accuracy_percent"],
-            2
-        ),
-        "%"
-    )
-
-    print("\nFichiers générés dans :", OUTPUT_DIR)
-
-    print("=" * 60)
-
-
-# ============================================================
-# COMMAND LINE
-# ============================================================
-
-if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument(
-
-        "--simulations",
-
-        type=int,
-
-        default=SIMULATIONS,
-
-        help="Nombre de simulations Monte Carlo"
-
-    )
-
-    args = parser.parse_args()
-
-    run_analysis(
-        simulations=args.simulations
-    )
+    global
