@@ -1,0 +1,16 @@
+{
+  "project": "BET261 PUBLIC COLLECTOR",
+  "created_at": "2026-11-27T16:47:24.481047+00:00",
+  "observations": [
+    {
+      "timestamp": "2026-11-27T16:47:36.348124+00:00",
+      "url": "https://bet261.mg/sports/102",
+      "hash": "59d8df0ce5df48ab3dc1d988165c6cca3df734bb317af69a6cd5c4e250302ad4",
+      "text": "Accès limité !\nCe site n'est pas disponible dans votre pays !\nSi vous pensez qu'il s'agit d'une erreur, contactez notre support en indiquant l'adresse IP ci-dessous.\n172.149.56.203",
+      "numbers": [
+        "172.149",
+        "56.203"
+      ]
+    }
+  ]
+}
