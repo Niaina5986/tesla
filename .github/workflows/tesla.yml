@@ -1,8 +1,8 @@
-name: TESLA V6 - Exact Score Intelligence
+name: TESLA V7 - Deep Score Investigation
 
 on:
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "*/15 * * * *"
 
   workflow_dispatch:
 
@@ -18,70 +18,60 @@ permissions:
   contents: write
 
 concurrency:
-  group: tesla-v6-analysis
+  group: tesla-v7-analysis
   cancel-in-progress: false
 
 jobs:
-  tesla-analysis:
+  deep-score-analysis:
     runs-on: ubuntu-latest
     timeout-minutes: 360
 
     steps:
-      # 1. Récupération du dépôt
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
 
-      # 2. Installation Python
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
 
-      # 3. Préparation des dossiers
-      - name: Prepare TESLA
+      - name: Prepare directories
         run: |
           mkdir -p data/tournaments
           mkdir -p output
 
-      # 4. Configuration des secrets
-      - name: Configure environment
-        run: |
-          echo "TESLA_BFS_STATE_LIMIT=12000" >> $GITHUB_ENV
-          echo "TESLA_DFS_NODE_LIMIT=30000" >> $GITHUB_ENV
-          echo "TESLA_MAX_ATOMS=35" >> $GITHUB_ENV
-          echo "TESLA_MAX_DEPTH=4" >> $GITHUB_ENV
-          echo "TESLA_MC_FORMULA_TRIALS=100000" >> $GITHUB_ENV
-          echo "TESLA_MAX_FORMULAS=40" >> $GITHUB_ENV
-          echo "TESLA_RANDOM_SEED=42" >> $GITHUB_ENV
-          echo "MAX_DISCOVERY_MATCHES=370" >> $GITHUB_ENV
-
-      # 5. Exécution du moteur mathématique
-      - name: Run TESLA V6
+      - name: Run TESLA V7
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TESLA_BFS_STATE_LIMIT: "12000"
+          TESLA_DFS_NODE_LIMIT: "30000"
+          TESLA_MAX_ATOMS: "35"
+          TESLA_MAX_DEPTH: "4"
+          TESLA_MC_FORMULA_TRIALS: "100000"
+          TESLA_MAX_FORMULAS: "40"
+          TESLA_MAX_DISCOVERY_MATCHES: "370"
+          TESLA_RANDOM_SEED: "42"
+          TESLA_NOTIFICATION_INTERVAL: "3600"
         run: |
           python -u script.py
 
-      # 6. Sauvegarde des résultats et de la mémoire Telegram
-      - name: Save TESLA results
-        if: success()
+      - name: Save analysis and notification state
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add tesla_notification_state.json
-          git add output/
+          git add output/ tesla_notification_state.json
 
           if git diff --cached --quiet; then
-            echo "Aucun nouveau fichier à sauvegarder."
-          else
-            git commit -m "TESLA V6: update analysis and results"
-
-            git pull --rebase origin main
-            git push origin HEAD:main
+            echo "No generated changes to save."
+            exit 0
           fi
+
+          git commit -m "TESLA V7: save analysis and hourly notification state"
+          git pull --rebase origin main
+          git push origin HEAD:main
