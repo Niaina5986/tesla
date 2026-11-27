@@ -1,7 +1,7 @@
 {
   "version": "TESLA_V7",
-  "generated_at": "2026-11-27T13:55:39.837672+00:00",
-  "elapsed_seconds": 5.361,
+  "generated_at": "2026-11-27T22:26:53.136337+00:00",
+  "elapsed_seconds": 4.242,
   "notification": {
     "should_notify": true,
     "reason": "HOURLY_REPORT",
@@ -61,7 +61,7 @@
         "top3_percent": 26.1111,
         "top5_percent": 40.0
       },
-      "discovery_elapsed_seconds": 0.829,
+      "discovery_elapsed_seconds": 0.756,
       "discovery_targets": 7,
       "bfs_operations": 84000,
       "dfs_nodes": 167426,
