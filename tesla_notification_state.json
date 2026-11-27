@@ -2,5 +2,8 @@
   "data_hash": "27734376644b9cb43784c4b02d6e983ede1d7b7b6f6790eee2e68d0ba4fa1193",
   "discovery_hash": "d8f56a3788e0d9c6bd5ff624d6afb22aae8f9d8230a2d16a6ebc150829e4bbb7",
   "last_notification_utc": "2026-11-27T13:26:26.025106+00:00",
-  "reason": "INITIAL_ANALYSIS"
+  "reason": "INITIAL_ANALYSIS",
+  "last_analysis_utc": "2026-11-27T13:47:52.431206+00:00",
+  "analysis_interval_seconds": 900,
+  "notification_interval_seconds": 3600
 }

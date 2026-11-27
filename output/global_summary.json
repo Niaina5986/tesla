@@ -1,11 +1,11 @@
 {
-  "version": "TESLA_V6",
-  "generated_at": "2026-11-27T13:45:00.239146+00:00",
-  "elapsed_seconds": 3.722,
+  "version": "TESLA_V7",
+  "generated_at": "2026-11-27T13:47:52.431065+00:00",
+  "elapsed_seconds": 5.285,
   "notification": {
     "should_notify": false,
-    "reason": "NO_CHANGE",
-    "policy": "Only on changed source data or changed discovery signature"
+    "reason": "WAITING_FOR_HOURLY_REPORT",
+    "policy": "Analyze every 15 minutes; send a report every 3600 seconds"
   },
   "configuration": {
     "bfs_state_limit": 12000,
@@ -61,7 +61,7 @@
         "top3_percent": 26.1111,
         "top5_percent": 40.0
       },
-      "discovery_elapsed_seconds": 0.631,
+      "discovery_elapsed_seconds": 0.831,
       "discovery_targets": 7,
       "bfs_operations": 84000,
       "dfs_nodes": 167426,
