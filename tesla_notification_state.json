@@ -3,7 +3,7 @@
   "discovery_hash": "d8f56a3788e0d9c6bd5ff624d6afb22aae8f9d8230a2d16a6ebc150829e4bbb7",
   "last_notification_utc": "2026-11-27T13:26:26.025106+00:00",
   "reason": "INITIAL_ANALYSIS",
-  "last_analysis_utc": "2026-11-27T13:49:58.012904+00:00",
+  "last_analysis_utc": "2026-11-27T13:50:48.389513+00:00",
   "analysis_interval_seconds": 900,
   "notification_interval_seconds": 3600
 }
