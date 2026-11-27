@@ -1,0 +1,479 @@
+JOURNÉE 1
+
+Wolverhampton 3-2 Manchester Red
+Bournemouth 1-3 London Reds
+Brentford 4-2 Brighton
+Liverpool 3-0 London Blues
+N. Forest 1-4 Spurs
+West Ham 0-1 Burnley
+Everton 0-2 Fulham
+Sunderland 1-0 C. Palace
+Newcastle 4-0 Manchester Blue
+A. Villa 1-0 Leeds
+JOURNÉE 2
+
+C. Palace 1-0 A. Villa
+London Blues 1-0 West Ham
+Burnley 2-1 Brentford
+London Reds 2-0 Sunderland
+Leeds 0-2 N. Forest
+Brighton 2-3 Spurs
+Fulham 3-2 Wolverhampton
+Manchester Red 2-1 Bournemouth
+Everton 1-1 Newcastle
+Manchester Blue 6-0 Liverpool
+
+JOURNÉE 3
+
+Bournemouth 0-0 Fulham
+Liverpool 1-2 Everton
+Leeds 2-0 C. Palace
+Wolverhampton 0-1 Newcastle
+A. Villa 0-0 London Reds
+Sunderland 0-4 Manchester Red
+West Ham 3-1 Manchester Blue
+Spurs 1-3 Burnley
+N. Forest 3-1 Brighton
+Brentford 3-3 London Blues
+
+JOURNÉE 4
+
+C. Palace 3-0 N. Forest
+Everton 2-0 West Ham
+Fulham 1-0 Sunderland
+London Reds 2-2 Leeds
+Manchester Blue 3-2 Brentford
+Manchester Red 0-1 A. Villa
+Wolverhampton 3-2 Liverpool
+Burnley 0-3 Brighton
+Newcastle 5-0 Bournemouth
+London Blues 0-1 Spurs
+
+JOURNÉE 5
+
+West Ham 2-1 Wolverhampton
+Leeds 1-2 Manchester Red
+C. Palace 0-0 London Reds
+Brentford 3-1 Everton
+N. Forest 3-0 Burnley
+Brighton 3-0 London Blues
+A. Villa 3-1 Fulham
+Sunderland 1-4 Newcastle
+Bournemouth 0-2 Liverpool
+Spurs 2-2 Manchester Blue
+
+JOURNÉE 6
+
+Bournemouth 2-0 West Ham
+Liverpool 4-1 Sunderland
+London Blues 1-1 Burnley
+Wolverhampton 2-1 Brentford
+Leeds 2-2 Fulham
+Manchester Red 1-3 C. Palace
+London Reds 4-0 N. Forest
+Manchester Blue 2-3 Brighton
+Everton 2-3 Spurs
+Newcastle 3-1 A. Villa
+
+JOURNÉE 7
+
+C. Palace 2-0 Fulham
+Spurs 2-0 Wolverhampton
+Leeds 0-1 Newcastle
+Burnley 0-4 Manchester Blue
+London Reds 0-1 Manchester Red
+A. Villa 3-2 Liverpool
+Sunderland 1-2 West Ham
+N. Forest 1-1 London Blues
+Brentford 2-3 Bournemouth
+Brighton 3-0 Everton
+
+JOURNÉE 8
+
+Everton 4-1 Burnley
+Newcastle 2-2 C. Palace
+Brighton 1-1 Wolverhampton
+Sunderland 1-3 Brentford
+Manchester Red 1-0 N. Forest
+Bournemouth 1-1 Spurs
+Liverpool 4-1 Leeds
+Manchester Blue 4-0 London Blues
+Fulham 0-2 London Reds
+West Ham 0-1 A. Villa
+
+JOURNÉE 9
+
+N. Forest 1-1 Manchester Blue
+London Reds 2-2 Newcastle
+Burnley 2-2 Wolverhampton
+A. Villa 1-1 Brentford
+Leeds 0-0 West Ham
+London Blues 5-0 Everton
+Brighton 3-2 Bournemouth
+C. Palace 1-3 Liverpool
+Manchester Red 2-3 Fulham
+Spurs 2-2 Sunderland
+
+JOURNÉE 10
+
+Sunderland 0-2 Brighton
+Everton 0-0 Manchester Blue
+Brentford 3-1 Leeds
+Liverpool 1-3 London Reds
+West Ham 1-4 C. Palace
+Bournemouth 0-0 Burnley
+A. Villa 5-1 Spurs
+Fulham 2-0 N. Forest
+Newcastle 0-0 Manchester Red
+Wolverhampton 1-1 London Blues
+
+JOURNÉE 11
+
+Fulham 2-1 Newcastle
+C. Palace 0-2 Brentford
+Burnley 3-1 Sunderland
+Brighton 2-1 A. Villa
+Leeds 0-3 Spurs
+Manchester Red 1-3 Liverpool
+N. Forest 2-0 Everton
+London Reds 2-2 West Ham
+Manchester Blue 1-1 Wolverhampton
+London Blues 0-1 Bournemouth
+
+JOURNÉE 12
+
+Liverpool 2-0 Fulham
+A. Villa 0-0 Burnley
+Wolverhampton 0-1 Everton
+Spurs 3-1 C. Palace
+Bournemouth 0-2 Manchester Blue
+Sunderland 1-2 London Blues
+Brentford 0-1 London Reds
+Leeds 2-2 Brighton
+West Ham 1-2 Manchester Red
+Newcastle 2-2 N. Forest
+
+
+JOURNÉE 13
+
+Fulham 3-0 West Ham
+Manchester Red 1-2 Brentford
+Manchester Blue 3-0 Sunderland
+C. Palace 1-2 Brighton
+Newcastle 2-2 Liverpool
+London Blues 1-3 A. Villa
+London Reds 3-1 Spurs
+Everton 2-0 Bournemouth
+Burnley 1-2 Leeds
+N. Forest 3-1 Wolverhampton
+JOURNÉE 14
+
+Leeds 1-0 London Blues
+West Ham 1-1 Newcastle
+Spurs 1-2 Manchester Red
+Sunderland 2-1 Everton
+Liverpool 4-0 N. Forest
+Bournemouth 0-1 Wolverhampton
+Brentford 1-0 Fulham
+A. Villa 1-2 Manchester Blue
+C. Palace 3-0 Burnley
+Brighton 0-0 London Reds
+
+JOURNÉE 15
+
+Liverpool 4-1 West Ham
+Manchester Blue 5-0 Leeds
+Fulham 3-1 Spurs
+London Reds 5-1 Burnley
+Everton 2-2 A. Villa
+London Blues 2-0 C. Palace
+Wolverhampton 1-2 Sunderland
+Newcastle 1-1 Brentford
+Manchester Red 0-1 Brighton
+N. Forest 4-0 Bournemouth
+
+JOURNÉE 16
+
+Brentford 1-3 Liverpool
+London Reds 3-0 London Blues
+Burnley 2-2 Manchester Red
+Sunderland 0-3 Bournemouth
+C. Palace 0-3 Manchester Blue
+West Ham 2-0 N. Forest
+Brighton 0-0 Fulham
+Leeds 1-0 Everton
+Spurs 3-2 Newcastle
+A. Villa 5-0 Wolverhampton
+
+JOURNÉE 17
+
+Everton 0-2 C. Palace
+Wolverhampton 2-1 Leeds
+Fulham 1-1 Burnley
+Liverpool 4-0 Spurs
+Bournemouth 1-1 A. Villa
+West Ham 0-2 Brentford
+N. Forest 1-2 Sunderland
+Newcastle 2-1 Brighton
+Manchester Red 4-1 London Blues
+Manchester Blue 0-0 London Reds
+
+JOURNÉE 18
+
+Leeds 1-4 Bournemouth
+Brighton 0-0 Liverpool
+A. Villa 0-0 Sunderland
+Brentford 1-2 N. Forest
+Burnley 0-1 Newcastle
+C. Palace 2-1 Wolverhampton
+Spurs 4-0 West Ham
+Manchester Red 0-2 Manchester Blue
+London Reds 3-2 Everton
+London Blues 0-1 Fulham
+
+JOURNÉE 19
+
+Liverpool 1-0 Burnley
+Bournemouth 3-1 C. Palace
+Newcastle 4-0 London Blues
+Brentford 4-2 Spurs
+Fulham 0-2 Manchester Blue
+Everton 0-2 Manchester Red
+Sunderland 1-4 Leeds
+West Ham 1-2 Brighton
+Wolverhampton 0-3 London Reds
+N. Forest 0-1 A. Villa
+
+JOURNÉE 20
+
+Leeds 0-3 A. Villa
+Manchester Red 1-1 Wolverhampton
+London Reds 2-1 Bournemouth
+Brighton 1-1 Brentford
+London Blues 2-2 Liverpool
+Spurs 2-0 N. Forest
+Burnley 3-2 West Ham
+Fulham 0-0 Everton
+C. Palace 1-0 Sunderland
+Manchester Blue 4-1 Newcastle
+
+
+JOURNÉE 21
+
+Liverpool 3-2 Manchester Blue
+Newcastle 4-0 A. Villa
+Everton 4-1 C. Palace
+Bournemouth 0-0 Manchester Red
+Wolverhampton 2-1 Fulham
+Spurs 2-1 Brighton
+N. Forest 3-1 Leeds
+Sunderland 1-1 London Reds
+Brentford 3-2 Burnley
+West Ham 1-0 London Blues
+
+JOURNÉE 22
+
+Fulham 1-4 Bournemouth
+London Blues 0-1 Brentford
+Brighton 3-0 N. Forest
+Burnley 2-1 Spurs
+Manchester Blue 1-1 West Ham
+Manchester Red 3-0 Sunderland
+London Reds 2-0 A. Villa
+Newcastle 1-1 Wolverhampton
+C. Palace 2-1 Leeds
+Everton 0-1 Liverpool
+
+JOURNÉE 23
+
+N. Forest 1-0 C. Palace
+West Ham 0-5 Everton
+Sunderland 2-2 Fulham
+Leeds 0-2 London Reds
+Brentford 2-2 Manchester Blue
+A. Villa 3-0 Manchester Red
+Liverpool 6-0 Wolverhampton
+Brighton 2-2 Burnley
+Bournemouth 2-1 Newcastle
+Spurs 1-3 London Blues
+
+JOURNÉE 24
+
+Wolverhampton 1-1 West Ham
+Manchester Red 3-1 Leeds
+London Reds 4-0 C. Palace
+Everton 2-0 Brentford
+Burnley 2-1 N. Forest
+London Blues 1-2 Brighton
+Fulham 0-2 A. Villa
+Newcastle 2-2 Sunderland
+Liverpool 2-0 Bournemouth
+Manchester Blue 3-1 Spurs
+
+JOURNÉE 25
+
+West Ham 2-2 Bournemouth
+Spurs 2-0 Everton
+Brighton 1-2 Manchester Blue
+N. Forest 1-1 London Reds
+C. Palace 3-2 Manchester Red
+A. Villa 2-0 Newcastle
+Leeds 1-4 Fulham
+Brentford 3-3 Wolverhampton
+Burnley 1-1 London Blues
+Sunderland 0-4 Liverpool
+
+JOURNÉE 26
+
+Everton 0-1 Brighton
+Bournemouth 1-0 Brentford
+London Blues 4-1 N. Forest
+West Ham 1-0 Sunderland
+Liverpool 3-2 A. Villa
+Fulham 0-0 C. Palace
+Manchester Red 3-0 London Reds
+Manchester Blue 0-0 Burnley
+Newcastle 1-0 Leeds
+Wolverhampton 0-0 Spurs
+JOURNÉE 27
+
+London Reds 2-2 Fulham
+London Blues 1-3 Manchester Blue
+Leeds 2-4 Liverpool
+Spurs 0-2 Bournemouth
+A. Villa 1-2 West Ham
+N. Forest 2-3 Manchester Red
+Brentford 2-1 Sunderland
+Burnley 0-1 Everton
+Brighton 1-1 Wolverhampton
+C. Palace 2-1 Newcastle
+
+JOURNÉE 28
+
+Sunderland 0-5 Spurs
+Fulham 2-0 Manchester Red
+Liverpool 2-1 C. Palace
+Bournemouth 1-1 Brighton
+Everton 0-1 London Blues
+West Ham 3-0 Leeds
+Brentford 1-0 A. Villa
+Manchester Blue 0-0 N. Forest
+Wolverhampton 3-0 Burnley
+Newcastle 1-2 London Reds
+
+JOURNÉE 29
+
+Brighton 2-1 Sunderland
+Manchester Blue 2-1 Everton
+Leeds 1-1 Brentford
+London Reds 1-2 Liverpool
+C. Palace 3-1 West Ham
+Burnley 0-4 Bournemouth
+Spurs 0-0 A. Villa
+N. Forest 1-3 Fulham
+Manchester Red 2-2 Newcastle
+London Blues 3-0 Wolverhampton
+
+JOURNÉE 30
+
+Newcastle 2-1 Fulham
+Brentford 2-1 C. Palace
+Sunderland 0-0 Burnley
+A. Villa 2-1 Brighton
+Spurs 4-2 Leeds
+Liverpool 1-1 Manchester Red
+Everton 3-0 N. Forest
+West Ham 0-2 London Reds
+Wolverhampton 1-2 Manchester Blue
+Bournemouth 1-0 London Blues
+
+JOURNÉE 31
+
+Fulham 2-2 Liverpool
+Burnley 1-3 A. Villa
+Everton 2-0 Wolverhampton
+C. Palace 2-0 Spurs
+Manchester Blue 2-1 Bournemouth
+London Blues 2-2 Sunderland
+London Reds 3-3 Brentford
+Brighton 3-1 Leeds
+Manchester Red 4-0 West Ham
+N. Forest 0-1 Newcastle
+
+JOURNÉE 32
+
+West Ham 3-0 Fulham
+Brentford 0-1 Manchester Red
+Sunderland 0-0 Manchester Blue
+Brighton 2-1 C. Palace
+Liverpool 4-2 Newcastle
+A. Villa 2-3 London Blues
+Spurs 4-2 London Reds
+Bournemouth 0-1 Everton
+Leeds 2-1 Burnley
+Wolverhampton 2-2 N. Forest
+
+JOURNÉE 33
+
+London Blues 1-0 Leeds
+Newcastle 0-2 West Ham
+Manchester Red 1-0 Spurs
+Everton 1-2 Sunderland
+N. Forest 0-1 Liverpool
+Wolverhampton 2-1 Bournemouth
+Fulham 1-2 Brentford
+Manchester Blue 4-0 A. Villa
+Burnley 1-1 C. Palace
+London Reds 2-1 Brighton
+
+JOURNÉE 34
+
+West Ham 1-3 Liverpool
+Leeds 0-5 Manchester Blue
+Spurs 5-1 Fulham
+Burnley 2-2 London Reds
+A. Villa 0-0 Everton
+C. Palace 2-1 London Blues
+Sunderland 0-5 Wolverhampton
+Brentford 2-3 Newcastle
+Brighton 1-1 Manchester Red
+Bournemouth 3-1 N. Forest
+
+JOURNÉE 35
+
+Liverpool 4-0 Brentford
+London Blues 2-1 London Reds
+Manchester Red 1-0 Burnley
+Bournemouth 2-1 Sunderland
+Manchester Blue 1-0 C. Palace
+N. Forest 1-1 West Ham
+Fulham 1-1 Brighton
+Everton 3-0 Leeds
+Newcastle 2-0 Spurs
+Wolverhampton 1-1 A. Villa
+
+JOURNÉE 36
+
+C. Palace 3-0 Everton
+Leeds 2-1 Wolverhampton
+Burnley 1-1 Fulham
+Spurs 1-0 Liverpool
+A. Villa 1-3 Bournemouth
+Brentford 2-1 West Ham
+Sunderland 3-2 N. Forest
+Brighton 1-1 Newcastle
+London Blues 1-0 Manchester Red
+London Reds 3-2 Manchester Blue
+
+JOURNÉE 37
+
+Bournemouth 3-1 Leeds
+Liverpool 4-1 Brighton
+Sunderland 2-3 A. Villa
+N. Forest 2-1 Brentford
+Newcastle 3-0 Burnley
+Wolverhampton 1-2 C. Palace
+Spurs 1-1 West Ham
+Manchester Blue 1-2 Manchester Red
+Everton 1-1 London Reds
+Fulham 1-0 London Blues
