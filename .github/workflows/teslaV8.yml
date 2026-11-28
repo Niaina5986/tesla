@@ -1,0 +1,51 @@
+name: TESLA V8 MASSIVE INVESTIGATION
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tesla-v8-investigation
+  cancel-in-progress: false
+
+jobs:
+  investigation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run TESLA V8
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+          TESLA_MAX_TESTS_PER_RUN: "1000000"
+          TESLA_MAX_RUNTIME_SECONDS: "420"
+          TESLA_MAX_INVENTORY: "300"
+
+        run: python script.py
+
+      - name: Save results
+        run: |
+          git config user.name "TESLA BOT"
+          git config user.email "tesla-bot@users.noreply.github.com"
+
+          git add output/ tesla_state.json
+
+          git diff --cached --quiet || \
+            git commit -m "TESLA V8 investigation results"
+
+          git push
