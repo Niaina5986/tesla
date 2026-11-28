@@ -1,9 +1,10 @@
-name: TESLA V8 MASSIVE INVESTIGATION
+name: TESLA V8 - Mathematical Investigation
 
 on:
+  workflow_dispatch:
+
   schedule:
     - cron: "*/10 * * * *"
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,7 +14,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  investigation:
+  tesla:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -22,37 +23,31 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
-      - name: Install dependencies
+      - name: Prepare directories
         run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi
-
-      - name: Run TESLA V8
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          TESLA_MAX_TESTS_PER_RUN: "1000000"
-          TESLA_MAX_RUNTIME_SECONDS: "420"
-          TESLA_MAX_INVENTORY: "300"
-        run: |
-          python -u script.py
-
-      - name: Verify and prepare state
-        if: always()
-        run: |
+          mkdir -p data/tournaments
           mkdir -p output
 
+      - name: Verify input files
+        run: |
+          echo "Checking tournament files..."
+          find data/tournaments -maxdepth 1 -type f -name "*.txt"
+
+          if ! find data/tournaments -maxdepth 1 -type f -name "*.txt" | grep -q .; then
+            echo "ERROR: No tournament TXT file found."
+            exit 1
+          fi
+
+      - name: Initialize persistent state
+        run: |
           if [ ! -f tesla_state.json ]; then
-            echo "State file absent: creation d'un état initial."
             cat > tesla_state.json <<'EOF'
           {
             "version": "TESLA_V8",
@@ -62,29 +57,50 @@ jobs:
             "total_rejected": 0,
             "operation_counts": {},
             "last_run": null,
+            "last_run_tests": 0,
+            "last_run_status": null,
             "data_hash": null,
             "best_candidates": []
           }
           EOF
           fi
 
-          echo "Fichiers de résultats :"
-          ls -lah output/ || true
+      - name: Run TESLA V8
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
-          echo "Fichier d'état :"
-          ls -lah tesla_state.json
+          TESLA_MAX_TESTS_PER_RUN: "1000000"
+          TESLA_MAX_RUNTIME_SECONDS: "420"
+          TESLA_MAX_INVENTORY: "300"
+          TESLA_MC_TRIALS: "10000"
+          TESLA_RANDOM_SEED: "42"
 
-      - name: Save results to GitHub
-        if: always()
         run: |
-          git config user.name "TESLA BOT"
-          git config user.email "tesla-bot@users.noreply.github.com"
+          python -u scriptV8.py
 
-          git add -A output/
-          git add tesla_state.json
+      - name: Verify results
+        run: |
+          test -s tesla_state.json
+          test -s output/global_summary.json
+
+          echo "TESLA V8 completed."
+          echo "State:"
+          cat tesla_state.json
+
+          echo "Output files:"
+          find output -maxdepth 1 -type f -print
+
+      - name: Commit investigation results
+        if: success()
+        run: |
+          git config user.name "TESLA V8 Bot"
+          git config user.email "actions@github.com"
+
+          git add tesla_state.json output/
 
           if git diff --cached --quiet; then
-            echo "Aucun nouveau résultat à enregistrer."
+            echo "No changes to commit."
           else
             git commit -m "TESLA V8 investigation results"
             git push origin HEAD:main
