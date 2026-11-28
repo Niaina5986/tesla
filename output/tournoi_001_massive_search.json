@@ -1,6 +1,6 @@
 {
   "tests": 1000000,
-  "elapsed_seconds": 0.672,
+  "elapsed_seconds": 0.919,
   "budget_status": "TEST_LIMIT_REACHED",
   "inventory_size": 300,
   "candidate_count": 500,
