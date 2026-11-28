@@ -2,7 +2,6 @@ name: TESLA V8 - Mathematical Investigation
 
 on:
   workflow_dispatch:
-
   schedule:
     - cron: "*/10 * * * *"
 
@@ -19,25 +18,29 @@ jobs:
     timeout-minutes: 10
 
     steps:
+      # 1. Récupération du dépôt
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: main
 
+      # 2. Installation de Python
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
 
+      # 3. Préparation des dossiers
       - name: Prepare directories
         run: |
           mkdir -p data/tournaments
           mkdir -p output
 
+      # 4. Vérification des données
       - name: Verify input files
         run: |
           echo "Checking tournament files..."
+
           find data/tournaments -maxdepth 1 -type f -name "*.txt"
 
           if ! find data/tournaments -maxdepth 1 -type f -name "*.txt" | grep -q .; then
@@ -45,6 +48,7 @@ jobs:
             exit 1
           fi
 
+      # 5. Initialisation de la mémoire persistante
       - name: Initialize persistent state
         run: |
           if [ ! -f tesla_state.json ]; then
@@ -65,32 +69,39 @@ jobs:
           EOF
           fi
 
+      # 6. Vérification de la syntaxe
+      - name: Check Python syntax
+        run: |
+          python -m py_compile scriptV8.py
+
+      # 7. Exécution du moteur TESLA
       - name: Run TESLA V8
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-
           TESLA_MAX_TESTS_PER_RUN: "1000000"
           TESLA_MAX_RUNTIME_SECONDS: "420"
           TESLA_MAX_INVENTORY: "300"
           TESLA_MC_TRIALS: "10000"
           TESLA_RANDOM_SEED: "42"
-
         run: |
           python -u scriptV8.py
 
+      # 8. Vérification des résultats
       - name: Verify results
         run: |
           test -s tesla_state.json
           test -s output/global_summary.json
 
-          echo "TESLA V8 completed."
-          echo "State:"
+          echo "TESLA V8 completed successfully."
+
+          echo "Persistent state:"
           cat tesla_state.json
 
-          echo "Output files:"
+          echo "Generated output files:"
           find output -maxdepth 1 -type f -print
 
+      # 9. Sauvegarde automatique sur GitHub
       - name: Commit investigation results
         if: success()
         run: |
