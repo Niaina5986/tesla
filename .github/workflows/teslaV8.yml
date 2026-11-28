@@ -3,7 +3,6 @@ name: TESLA V8 MASSIVE INVESTIGATION
 on:
   schedule:
     - cron: "*/10 * * * *"
-
   workflow_dispatch:
 
 permissions:
@@ -19,33 +18,74 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
-      - name: Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
 
       - name: Run TESLA V8
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-
           TESLA_MAX_TESTS_PER_RUN: "1000000"
           TESLA_MAX_RUNTIME_SECONDS: "420"
           TESLA_MAX_INVENTORY: "300"
+        run: |
+          python -u script.py
 
-        run: python script.py
+      - name: Verify and prepare state
+        if: always()
+        run: |
+          mkdir -p output
 
-      - name: Save results
+          if [ ! -f tesla_state.json ]; then
+            echo "State file absent: creation d'un état initial."
+            cat > tesla_state.json <<'EOF'
+          {
+            "version": "TESLA_V8",
+            "total_tests": 0,
+            "total_runs": 0,
+            "total_candidates": 0,
+            "total_rejected": 0,
+            "operation_counts": {},
+            "last_run": null,
+            "data_hash": null,
+            "best_candidates": []
+          }
+          EOF
+          fi
+
+          echo "Fichiers de résultats :"
+          ls -lah output/ || true
+
+          echo "Fichier d'état :"
+          ls -lah tesla_state.json
+
+      - name: Save results to GitHub
+        if: always()
         run: |
           git config user.name "TESLA BOT"
           git config user.email "tesla-bot@users.noreply.github.com"
 
-          git add output/ tesla_state.json
+          git add -A output/
+          git add tesla_state.json
 
-          git diff --cached --quiet || \
+          if git diff --cached --quiet; then
+            echo "Aucun nouveau résultat à enregistrer."
+          else
             git commit -m "TESLA V8 investigation results"
-
-          git push
+            git push origin HEAD:main
+          fi
