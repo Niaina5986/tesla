@@ -1,75 +1,975 @@
 {
-  "version": "TESLA_V7",
-  "generated_at": "2026-11-28T03:44:48.430946+00:00",
-  "elapsed_seconds": 6.978,
-  "notification": {
-    "should_notify": true,
-    "reason": "HOURLY_REPORT",
-    "policy": "Analyze every 15 minutes; send a report every 3600 seconds"
+  "version": "TESLA_V8",
+  "generated_at": "2026-11-28T05:15:33.074728+00:00",
+  "total_tests_this_run": 1000000,
+  "total_tests_cumulative": 1000000,
+  "total_runs": 1,
+  "total_candidates_cumulative": 500,
+  "elapsed_seconds": 0.491,
+  "status": "TEST_LIMIT_REACHED",
+  "operation_counts_cumulative": {
+    "ABS": 300,
+    "NEGATIVE": 300,
+    "SQUARE": 300,
+    "CUBE": 90,
+    "FLOOR": 300,
+    "CEIL": 300,
+    "ROUND": 300,
+    "SIN": 300,
+    "COS": 300,
+    "SQRT": 296,
+    "LN": 295,
+    "LOG10": 295,
+    "INVERSE": 299,
+    "FACTORIAL": 9,
+    "DIGIT_SUM": 281,
+    "REVERSE_DIGITS": 281,
+    "ADD": 38661,
+    "SUB": 38661,
+    "REVERSE_SUB": 38661,
+    "MUL": 38661,
+    "DIV": 38655,
+    "REVERSE_DIV": 38368,
+    "MOD": 38655,
+    "REVERSE_MOD": 38367,
+    "POWER": 1250,
+    "REVERSE_POWER": 2007,
+    "XOR": 37532,
+    "AND": 37532,
+    "OR": 37532,
+    "SHIFT_LEFT_A": 37532,
+    "SHIFT_RIGHT_A": 37532,
+    "SHIFT_LEFT_B": 37532,
+    "SHIFT_RIGHT_B": 37532,
+    "MEAN": 38660,
+    "ABS_DIFFERENCE": 38660,
+    "DISTANCE": 38660,
+    "FLOOR_SUM": 38660,
+    "CEIL_SUM": 38660,
+    "ROUND_SUM": 38660,
+    "SQRT_A": 37677,
+    "SQRT_B": 38447,
+    "LOG_A": 37384,
+    "LOG_B": 38441,
+    "LOG_RATIO": 37175
   },
-  "configuration": {
-    "bfs_state_limit": 12000,
-    "dfs_node_limit": 30000,
-    "max_atoms": 35,
-    "max_depth": 4,
-    "monte_carlo_formula_trials_per_goal": 100000
-  },
+  "data_hash": "d4b120f1d45b25a8f530c2f0180db1194ae23aa963f9886a4b1d7ecc27708e71",
   "tournaments": {
     "tournoi_001": {
-      "stats": {
-        "matches": 370,
-        "rounds": 37,
-        "distinct_scores": 26,
-        "score_frequency": {
-          "2-1": 36,
-          "1-1": 34,
-          "1-0": 25,
-          "2-2": 25,
-          "0-1": 24,
-          "1-2": 24,
-          "0-0": 23,
-          "2-0": 22,
-          "3-0": 21,
-          "3-1": 19,
-          "0-2": 17,
-          "1-3": 15,
-          "3-2": 15,
-          "4-0": 13,
-          "2-3": 9,
-          "4-1": 9,
-          "1-4": 7,
-          "0-3": 6,
-          "4-2": 5,
-          "0-4": 4,
-          "5-0": 4,
-          "0-5": 4,
-          "3-3": 3,
-          "5-1": 3,
-          "6-0": 2,
-          "2-4": 1
-        },
-        "home_average": 1.67568,
-        "away_average": 1.25405,
-        "btts_percent": 55.4054
-      },
+      "matches": 370,
+      "tests": 1000000,
+      "candidates": 500,
       "blind": {
-        "tested": 360,
-        "top1_hits": 28,
-        "top3_hits": 94,
-        "top5_hits": 144,
-        "top1_percent": 7.7778,
-        "top3_percent": 26.1111,
-        "top5_percent": 40.0
-      },
-      "discovery_elapsed_seconds": 1.133,
-      "discovery_targets": 7,
-      "bfs_operations": 84000,
-      "dfs_nodes": 167426,
-      "formula_count": 1065
+        "tested": 365,
+        "home_top1": 27.123,
+        "away_top1": 30.137,
+        "home_top3": 72.055,
+        "away_top3": 86.301,
+        "home_top5": 96.986,
+        "away_top5": 98.63,
+        "predictions": [
+          {
+            "round": 33,
+            "actual": "1-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 33,
+            "actual": "0-2",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 33,
+            "actual": "1-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 33,
+            "actual": "1-2",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 33,
+            "actual": "0-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 33,
+            "actual": "2-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 33,
+            "actual": "1-2",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 33,
+            "actual": "4-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 33,
+            "actual": "1-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 33,
+            "actual": "2-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "1-3",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "0-5",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "5-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "2-2",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "0-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "2-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "0-5",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "2-3",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "1-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 34,
+            "actual": "3-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "4-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "2-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "1-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "2-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "1-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "1-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "1-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "3-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "2-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 35,
+            "actual": "1-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "3-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "2-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "1-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "1-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "1-3",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "2-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "3-2",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "1-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "1-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 36,
+            "actual": "3-2",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "3-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "4-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "2-3",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "2-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "3-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "1-2",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "1-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "1-2",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "1-1",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "round": 37,
+            "actual": "1-0",
+            "home_candidates": [
+              1,
+              2,
+              0,
+              3,
+              4
+            ],
+            "away_candidates": [
+              1,
+              0,
+              2,
+              3,
+              4
+            ]
+          }
+        ]
+      }
     }
-  },
-  "cross_validation": {
-    "status": "NO_EXTERNAL_TOURNAMENT",
-    "tournaments_found": 1
   }
 }

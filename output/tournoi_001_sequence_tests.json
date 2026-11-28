@@ -1,0 +1,23 @@
+{
+  "hg": {
+    "mean": 1.6756756756756757,
+    "variance": 1.727246165084003,
+    "lag1_autocorrelation": -0.003175795100588253,
+    "runs_count": 190,
+    "entropy_bits": 2.3335564156799307
+  },
+  "ag": {
+    "mean": 1.2540540540540541,
+    "variance": 1.2868078889700512,
+    "lag1_autocorrelation": 0.027492612974766226,
+    "runs_count": 168,
+    "entropy_bits": 2.080527598564051
+  },
+  "total": {
+    "mean": 2.9297297297297296,
+    "variance": 2.3464134404674946,
+    "lag1_autocorrelation": 0.0025040061871742193,
+    "runs_count": 192,
+    "entropy_bits": 2.618463503075308
+  }
+}

@@ -1,0 +1,3055 @@
+{
+  "tests": 1000000,
+  "elapsed_seconds": 0.466,
+  "budget_status": "TEST_LIMIT_REACHED",
+  "inventory_size": 300,
+  "candidate_count": 500,
+  "operation_counts": {
+    "ABS": 300,
+    "NEGATIVE": 300,
+    "SQUARE": 300,
+    "CUBE": 90,
+    "FLOOR": 300,
+    "CEIL": 300,
+    "ROUND": 300,
+    "SIN": 300,
+    "COS": 300,
+    "SQRT": 296,
+    "LN": 295,
+    "LOG10": 295,
+    "INVERSE": 299,
+    "FACTORIAL": 9,
+    "DIGIT_SUM": 281,
+    "REVERSE_DIGITS": 281,
+    "ADD": 38661,
+    "SUB": 38661,
+    "REVERSE_SUB": 38661,
+    "MUL": 38661,
+    "DIV": 38655,
+    "REVERSE_DIV": 38368,
+    "MOD": 38655,
+    "REVERSE_MOD": 38367,
+    "POWER": 1250,
+    "REVERSE_POWER": 2007,
+    "XOR": 37532,
+    "AND": 37532,
+    "OR": 37532,
+    "SHIFT_LEFT_A": 37532,
+    "SHIFT_RIGHT_A": 37532,
+    "SHIFT_LEFT_B": 37532,
+    "SHIFT_RIGHT_B": 37532,
+    "MEAN": 38660,
+    "ABS_DIFFERENCE": 38660,
+    "DISTANCE": 38660,
+    "FLOOR_SUM": 38660,
+    "CEIL_SUM": 38660,
+    "ROUND_SUM": 38660,
+    "SQRT_A": 37677,
+    "SQRT_B": 38447,
+    "LOG_A": 37384,
+    "LOG_B": 38441,
+    "LOG_RATIO": 37175
+  },
+  "candidates": [
+    {
+      "operation": "AND",
+      "target": 0,
+      "expression": "match_index AND match_index",
+      "matches": 3802
+    },
+    {
+      "operation": "AND",
+      "target": 1,
+      "expression": "match_index AND match_index",
+      "matches": 1470
+    },
+    {
+      "operation": "AND",
+      "target": 2,
+      "expression": "match_index AND match_index",
+      "matches": 1393
+    },
+    {
+      "operation": "AND",
+      "target": 4,
+      "expression": "match_index AND match_index",
+      "matches": 1311
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "match_index REVERSE_MOD match_index",
+      "matches": 910
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 4,
+      "expression": "match_index REVERSE_MOD match_index",
+      "matches": 778
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 5,
+      "expression": "match_index REVERSE_MOD match_index",
+      "matches": 762
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 2,
+      "expression": "match_index REVERSE_MOD match_index",
+      "matches": 727
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 1,
+      "expression": "match_index REVERSE_MOD match_index",
+      "matches": 720
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 3,
+      "expression": "match_index REVERSE_MOD match_index",
+      "matches": 716
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 6,
+      "expression": "match_index REVERSE_MOD match_index",
+      "matches": 704
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 4,
+      "expression": "match_index SHIFT_RIGHT_A match_index",
+      "matches": 563
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 6,
+      "expression": "match_index SHIFT_RIGHT_A match_index",
+      "matches": 557
+    },
+    {
+      "operation": "AND",
+      "target": 3,
+      "expression": "match_index AND match_index",
+      "matches": 509
+    },
+    {
+      "operation": "AND",
+      "target": 6,
+      "expression": "match_index AND match_index",
+      "matches": 482
+    },
+    {
+      "operation": "AND",
+      "target": 0,
+      "expression": "away_goals AND match_index",
+      "matches": 427
+    },
+    {
+      "operation": "AND",
+      "target": 5,
+      "expression": "match_index AND match_index",
+      "matches": 388
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "goal_difference REVERSE_MOD match_index",
+      "matches": 328
+    },
+    {
+      "operation": "REVERSE_POWER",
+      "target": 0,
+      "expression": "goal_difference REVERSE_POWER match_index",
+      "matches": 325
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "match_index MOD match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 2,
+      "expression": "match_index SHIFT_LEFT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 0,
+      "expression": "match_index SHIFT_RIGHT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO match_index",
+      "matches": 284
+    },
+    {
+      "operation": "MOD",
+      "target": 3,
+      "expression": "home_goals MOD match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 6,
+      "expression": "home_goals SHIFT_LEFT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 1,
+      "expression": "home_goals SHIFT_RIGHT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "MOD",
+      "target": 2,
+      "expression": "away_goals MOD match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 4,
+      "expression": "away_goals SHIFT_LEFT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 1,
+      "expression": "away_goals SHIFT_RIGHT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "MOD",
+      "target": 5,
+      "expression": "total_goals MOD match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 2,
+      "expression": "total_goals SHIFT_RIGHT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "MOD",
+      "target": 6,
+      "expression": "total_goals MOD match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 3,
+      "expression": "total_goals SHIFT_RIGHT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "MUL",
+      "target": 0,
+      "expression": "away_goals MUL match_index",
+      "matches": 284
+    },
+    {
+      "operation": "DIV",
+      "target": 0,
+      "expression": "away_goals DIV match_index",
+      "matches": 284
+    },
+    {
+      "operation": "MOD",
+      "target": 0,
+      "expression": "away_goals MOD match_index",
+      "matches": 284
+    },
+    {
+      "operation": "REVERSE_POWER",
+      "target": 1,
+      "expression": "away_goals REVERSE_POWER match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 0,
+      "expression": "away_goals SHIFT_LEFT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 0,
+      "expression": "away_goals SHIFT_RIGHT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 0,
+      "expression": "away_goals SQRT_A match_index",
+      "matches": 284
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 3,
+      "expression": "match_index SHIFT_RIGHT_A match_index",
+      "matches": 283
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 3,
+      "expression": "match_index SQRT_A match_index",
+      "matches": 281
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 5,
+      "expression": "match_index SHIFT_RIGHT_A match_index",
+      "matches": 280
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 4,
+      "expression": "match_index SQRT_A match_index",
+      "matches": 276
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 5,
+      "expression": "match_index SQRT_A match_index",
+      "matches": 269
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 6,
+      "expression": "match_index SQRT_A match_index",
+      "matches": 260
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 5,
+      "expression": "match_index REVERSE_SUB match_index",
+      "matches": 157
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 5,
+      "expression": "match_index ABS_DIFFERENCE match_index",
+      "matches": 157
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 4,
+      "expression": "match_index REVERSE_SUB match_index",
+      "matches": 150
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 4,
+      "expression": "match_index ABS_DIFFERENCE match_index",
+      "matches": 150
+    },
+    {
+      "operation": "AND",
+      "target": 4,
+      "expression": "total_goals AND match_index",
+      "matches": 149
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "away_goals REVERSE_MOD match_index",
+      "matches": 144
+    },
+    {
+      "operation": "POWER",
+      "target": 0,
+      "expression": "match_index POWER goal_difference",
+      "matches": 143
+    },
+    {
+      "operation": "AND",
+      "target": 2,
+      "expression": "away_goals AND match_index",
+      "matches": 141
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 1,
+      "expression": "away_goals REVERSE_MOD match_index",
+      "matches": 140
+    },
+    {
+      "operation": "AND",
+      "target": 0,
+      "expression": "total_goals AND match_index",
+      "matches": 138
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 6,
+      "expression": "match_index REVERSE_SUB match_index",
+      "matches": 129
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 6,
+      "expression": "match_index ABS_DIFFERENCE match_index",
+      "matches": 129
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 1,
+      "expression": "match_index REVERSE_SUB match_index",
+      "matches": 129
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 1,
+      "expression": "match_index ABS_DIFFERENCE match_index",
+      "matches": 129
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 3,
+      "expression": "match_index REVERSE_SUB match_index",
+      "matches": 129
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 3,
+      "expression": "match_index ABS_DIFFERENCE match_index",
+      "matches": 129
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 2,
+      "expression": "match_index REVERSE_SUB match_index",
+      "matches": 128
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 2,
+      "expression": "match_index ABS_DIFFERENCE match_index",
+      "matches": 128
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 2,
+      "expression": "match_index REVERSE_DIV match_index",
+      "matches": 116
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 2,
+      "expression": "total_goals REVERSE_MOD match_index",
+      "matches": 106
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 3,
+      "expression": "total_goals REVERSE_MOD match_index",
+      "matches": 105
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 4,
+      "expression": "total_goals REVERSE_MOD match_index",
+      "matches": 105
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 1,
+      "expression": "total_goals REVERSE_MOD match_index",
+      "matches": 103
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "total_goals REVERSE_MOD match_index",
+      "matches": 101
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 2,
+      "expression": "home_goals REVERSE_MOD match_index",
+      "matches": 98
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 1,
+      "expression": "home_goals REVERSE_MOD match_index",
+      "matches": 95
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "home_goals REVERSE_MOD match_index",
+      "matches": 91
+    },
+    {
+      "operation": "XOR",
+      "target": 5,
+      "expression": "match_index XOR match_index",
+      "matches": 79
+    },
+    {
+      "operation": "AND",
+      "target": 0,
+      "expression": "home_goals AND match_index",
+      "matches": 74
+    },
+    {
+      "operation": "AND",
+      "target": 1,
+      "expression": "total_goals AND match_index",
+      "matches": 72
+    },
+    {
+      "operation": "AND",
+      "target": 2,
+      "expression": "total_goals AND match_index",
+      "matches": 72
+    },
+    {
+      "operation": "AND",
+      "target": 3,
+      "expression": "home_goals AND match_index",
+      "matches": 71
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 3,
+      "expression": "match_index REVERSE_DIV match_index",
+      "matches": 71
+    },
+    {
+      "operation": "AND",
+      "target": 2,
+      "expression": "home_goals AND match_index",
+      "matches": 70
+    },
+    {
+      "operation": "AND",
+      "target": 1,
+      "expression": "home_goals AND match_index",
+      "matches": 69
+    },
+    {
+      "operation": "AND",
+      "target": 6,
+      "expression": "total_goals AND match_index",
+      "matches": 69
+    },
+    {
+      "operation": "AND",
+      "target": 5,
+      "expression": "total_goals AND match_index",
+      "matches": 68
+    },
+    {
+      "operation": "XOR",
+      "target": 6,
+      "expression": "match_index XOR match_index",
+      "matches": 66
+    },
+    {
+      "operation": "XOR",
+      "target": 4,
+      "expression": "match_index XOR match_index",
+      "matches": 66
+    },
+    {
+      "operation": "XOR",
+      "target": 3,
+      "expression": "match_index XOR match_index",
+      "matches": 65
+    },
+    {
+      "operation": "XOR",
+      "target": 1,
+      "expression": "match_index XOR match_index",
+      "matches": 64
+    },
+    {
+      "operation": "XOR",
+      "target": 2,
+      "expression": "match_index XOR match_index",
+      "matches": 64
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 4,
+      "expression": "match_index REVERSE_DIV match_index",
+      "matches": 55
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 5,
+      "expression": "total_goals REVERSE_MOD match_index",
+      "matches": 48
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 5,
+      "expression": "match_index REVERSE_DIV match_index",
+      "matches": 41
+    },
+    {
+      "operation": "MOD",
+      "target": 0,
+      "expression": "match_index MOD goal_difference",
+      "matches": 36
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 6,
+      "expression": "match_index REVERSE_DIV match_index",
+      "matches": 33
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 6,
+      "expression": "match_index SQRT_B match_index",
+      "matches": 24
+    },
+    {
+      "operation": "DIGIT_SUM",
+      "target": 6,
+      "expression": "match_index",
+      "matches": 16
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 5,
+      "expression": "match_index SQRT_B match_index",
+      "matches": 15
+    },
+    {
+      "operation": "DIGIT_SUM",
+      "target": 5,
+      "expression": "match_index",
+      "matches": 14
+    },
+    {
+      "operation": "DIGIT_SUM",
+      "target": 4,
+      "expression": "match_index",
+      "matches": 11
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 6,
+      "expression": "match_index SHIFT_RIGHT_B match_index",
+      "matches": 11
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 4,
+      "expression": "match_index SQRT_B match_index",
+      "matches": 8
+    },
+    {
+      "operation": "DIGIT_SUM",
+      "target": 3,
+      "expression": "match_index",
+      "matches": 7
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 4,
+      "expression": "match_index SHIFT_RIGHT_B match_index",
+      "matches": 5
+    },
+    {
+      "operation": "AND",
+      "target": 0,
+      "expression": "away_goals AND goal_difference",
+      "matches": 5
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "match_index REVERSE_MOD goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 2,
+      "expression": "match_index SHIFT_LEFT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 0,
+      "expression": "match_index SHIFT_RIGHT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 5,
+      "expression": "match_index SHIFT_RIGHT_B match_index",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 6,
+      "expression": "home_goals SHIFT_LEFT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 1,
+      "expression": "home_goals SHIFT_RIGHT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "MOD",
+      "target": 0,
+      "expression": "away_goals MOD goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 4,
+      "expression": "away_goals SHIFT_LEFT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 1,
+      "expression": "away_goals SHIFT_RIGHT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 4,
+      "expression": "away_goals SHIFT_RIGHT_B match_index",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 6,
+      "expression": "away_goals SHIFT_RIGHT_B match_index",
+      "matches": 4
+    },
+    {
+      "operation": "AND",
+      "target": 4,
+      "expression": "total_goals AND goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 2,
+      "expression": "total_goals SHIFT_RIGHT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 4,
+      "expression": "total_goals SHIFT_RIGHT_B match_index",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 6,
+      "expression": "total_goals SHIFT_RIGHT_B match_index",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 4,
+      "expression": "goal_difference SHIFT_RIGHT_B match_index",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 6,
+      "expression": "goal_difference SHIFT_RIGHT_B match_index",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 4,
+      "expression": "match_index SHIFT_RIGHT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 6,
+      "expression": "match_index SHIFT_RIGHT_A goal_difference",
+      "matches": 4
+    },
+    {
+      "operation": "DIGIT_SUM",
+      "target": 2,
+      "expression": "match_index",
+      "matches": 3
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 3,
+      "expression": "match_index SQRT_B match_index",
+      "matches": 3
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "match_index MOD hg_mean",
+      "matches": 3
+    },
+    {
+      "operation": "SUB",
+      "target": 1,
+      "expression": "goal_difference SUB goal_difference",
+      "matches": 3
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 1,
+      "expression": "goal_difference ABS_DIFFERENCE goal_difference",
+      "matches": 3
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 6,
+      "expression": "goal_difference SQRT_B match_index",
+      "matches": 3
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 3,
+      "expression": "total_goals SHIFT_RIGHT_A goal_difference",
+      "matches": 3
+    },
+    {
+      "operation": "MUL",
+      "target": 0,
+      "expression": "away_goals MUL goal_difference",
+      "matches": 3
+    },
+    {
+      "operation": "DIV",
+      "target": 0,
+      "expression": "away_goals DIV goal_difference",
+      "matches": 3
+    },
+    {
+      "operation": "REVERSE_POWER",
+      "target": 1,
+      "expression": "away_goals REVERSE_POWER goal_difference",
+      "matches": 3
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 0,
+      "expression": "away_goals SHIFT_LEFT_A goal_difference",
+      "matches": 3
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 0,
+      "expression": "away_goals SHIFT_RIGHT_A goal_difference",
+      "matches": 3
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 0,
+      "expression": "away_goals SQRT_A goal_difference",
+      "matches": 3
+    },
+    {
+      "operation": "MOD",
+      "target": 0,
+      "expression": "match_index MOD hg_mean",
+      "matches": 3
+    },
+    {
+      "operation": "REVERSE_DIGITS",
+      "target": 2,
+      "expression": "match_index",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_DIGITS",
+      "target": 3,
+      "expression": "match_index",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "match_index REVERSE_MOD away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "AND",
+      "target": 0,
+      "expression": "match_index AND away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 2,
+      "expression": "match_index SHIFT_LEFT_A away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 0,
+      "expression": "match_index SHIFT_RIGHT_A away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 1,
+      "expression": "match_index ABS_DIFFERENCE away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "match_index MOD total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "match_index REVERSE_MOD total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 2,
+      "expression": "match_index SHIFT_LEFT_A total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 0,
+      "expression": "match_index SHIFT_RIGHT_A total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "AND",
+      "target": 0,
+      "expression": "match_index AND goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "AND",
+      "target": 1,
+      "expression": "match_index AND goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER match_index",
+      "matches": 2
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "match_index MOD ag_mean",
+      "matches": 2
+    },
+    {
+      "operation": "OR",
+      "target": 3,
+      "expression": "home_goals OR away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 6,
+      "expression": "home_goals SHIFT_LEFT_A away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 1,
+      "expression": "home_goals SHIFT_RIGHT_A away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "MOD",
+      "target": 3,
+      "expression": "home_goals MOD total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 6,
+      "expression": "home_goals SHIFT_LEFT_A total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 1,
+      "expression": "home_goals SHIFT_RIGHT_A total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 1,
+      "expression": "home_goals REVERSE_MOD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 4,
+      "expression": "home_goals SHIFT_RIGHT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 6,
+      "expression": "home_goals SHIFT_RIGHT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "MOD",
+      "target": 2,
+      "expression": "away_goals MOD total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 4,
+      "expression": "away_goals SHIFT_LEFT_A total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 1,
+      "expression": "away_goals SHIFT_RIGHT_A total_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SUB",
+      "target": 4,
+      "expression": "away_goals SUB goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "away_goals REVERSE_MOD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "AND",
+      "target": 2,
+      "expression": "away_goals AND goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 4,
+      "expression": "away_goals ABS_DIFFERENCE goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "SUB",
+      "target": 5,
+      "expression": "away_goals SUB goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 1,
+      "expression": "away_goals REVERSE_MOD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 5,
+      "expression": "away_goals ABS_DIFFERENCE goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 3,
+      "expression": "away_goals SHIFT_RIGHT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 3,
+      "expression": "away_goals SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 5,
+      "expression": "away_goals SHIFT_RIGHT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 4,
+      "expression": "away_goals SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 5,
+      "expression": "away_goals SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 6,
+      "expression": "away_goals SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "ADD",
+      "target": 3,
+      "expression": "total_goals ADD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 3,
+      "expression": "total_goals REVERSE_MOD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 3,
+      "expression": "total_goals FLOOR_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 3,
+      "expression": "total_goals CEIL_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 3,
+      "expression": "total_goals ROUND_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "MUL",
+      "target": 0,
+      "expression": "total_goals MUL away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 0,
+      "expression": "total_goals REVERSE_DIV away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "total_goals REVERSE_MOD away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "total_goals POWER away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_POWER",
+      "target": 0,
+      "expression": "total_goals REVERSE_POWER away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "AND",
+      "target": 0,
+      "expression": "total_goals AND away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_LEFT_B",
+      "target": 0,
+      "expression": "total_goals SHIFT_LEFT_B away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 0,
+      "expression": "total_goals SHIFT_RIGHT_B away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 0,
+      "expression": "total_goals SQRT_B away_goals",
+      "matches": 2
+    },
+    {
+      "operation": "ADD",
+      "target": 2,
+      "expression": "total_goals ADD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 2,
+      "expression": "total_goals REVERSE_MOD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "MEAN",
+      "target": 1,
+      "expression": "total_goals MEAN goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 2,
+      "expression": "total_goals FLOOR_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 2,
+      "expression": "total_goals CEIL_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 2,
+      "expression": "total_goals ROUND_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 2,
+      "expression": "total_goals REVERSE_SUB match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 3,
+      "expression": "total_goals SHIFT_RIGHT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 2,
+      "expression": "total_goals ABS_DIFFERENCE match_index",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 3,
+      "expression": "total_goals REVERSE_SUB match_index",
+      "matches": 2
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 3,
+      "expression": "total_goals ABS_DIFFERENCE match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 3,
+      "expression": "total_goals SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 6,
+      "expression": "total_goals REVERSE_SUB match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 5,
+      "expression": "total_goals SHIFT_RIGHT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 6,
+      "expression": "total_goals ABS_DIFFERENCE match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 4,
+      "expression": "total_goals SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 5,
+      "expression": "total_goals REVERSE_DIV match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 5,
+      "expression": "total_goals SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "ADD",
+      "target": 1,
+      "expression": "total_goals ADD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 1,
+      "expression": "total_goals REVERSE_MOD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 1,
+      "expression": "total_goals FLOOR_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 1,
+      "expression": "total_goals CEIL_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 1,
+      "expression": "total_goals ROUND_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 6,
+      "expression": "total_goals REVERSE_DIV match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 6,
+      "expression": "total_goals SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "MOD",
+      "target": 0,
+      "expression": "total_goals MOD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ADD",
+      "target": 5,
+      "expression": "goal_difference ADD match_index",
+      "matches": 2
+    },
+    {
+      "operation": "MOD",
+      "target": 5,
+      "expression": "goal_difference MOD match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 3,
+      "expression": "goal_difference SHIFT_RIGHT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 5,
+      "expression": "goal_difference FLOOR_SUM match_index",
+      "matches": 2
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 5,
+      "expression": "goal_difference CEIL_SUM match_index",
+      "matches": 2
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 5,
+      "expression": "goal_difference ROUND_SUM match_index",
+      "matches": 2
+    },
+    {
+      "operation": "ADD",
+      "target": 6,
+      "expression": "goal_difference ADD match_index",
+      "matches": 2
+    },
+    {
+      "operation": "MOD",
+      "target": 6,
+      "expression": "goal_difference MOD match_index",
+      "matches": 2
+    },
+    {
+      "operation": "MEAN",
+      "target": 3,
+      "expression": "goal_difference MEAN match_index",
+      "matches": 2
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 6,
+      "expression": "goal_difference FLOOR_SUM match_index",
+      "matches": 2
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 6,
+      "expression": "goal_difference CEIL_SUM match_index",
+      "matches": 2
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 6,
+      "expression": "goal_difference ROUND_SUM match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 3,
+      "expression": "goal_difference SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 5,
+      "expression": "goal_difference SHIFT_RIGHT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "MEAN",
+      "target": 5,
+      "expression": "goal_difference MEAN match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 4,
+      "expression": "goal_difference SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 5,
+      "expression": "goal_difference SQRT_B match_index",
+      "matches": 2
+    },
+    {
+      "operation": "SUB",
+      "target": 2,
+      "expression": "goal_difference SUB goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 2,
+      "expression": "goal_difference ABS_DIFFERENCE goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "POWER",
+      "target": 0,
+      "expression": "away_goals POWER match_index",
+      "matches": 2
+    },
+    {
+      "operation": "ADD",
+      "target": 3,
+      "expression": "match_index ADD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 3,
+      "expression": "match_index REVERSE_MOD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 3,
+      "expression": "match_index SHIFT_RIGHT_A goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 3,
+      "expression": "match_index FLOOR_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 3,
+      "expression": "match_index CEIL_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 3,
+      "expression": "match_index ROUND_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ADD",
+      "target": 4,
+      "expression": "match_index ADD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 4,
+      "expression": "match_index REVERSE_MOD goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "MEAN",
+      "target": 2,
+      "expression": "match_index MEAN goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 4,
+      "expression": "match_index FLOOR_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 4,
+      "expression": "match_index CEIL_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 4,
+      "expression": "match_index ROUND_SUM goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 3,
+      "expression": "match_index SQRT_A goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 5,
+      "expression": "match_index SHIFT_RIGHT_A goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "MEAN",
+      "target": 4,
+      "expression": "match_index MEAN goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "MEAN",
+      "target": 6,
+      "expression": "match_index MEAN goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 4,
+      "expression": "match_index SQRT_A goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 5,
+      "expression": "match_index SQRT_A goal_difference",
+      "matches": 2
+    },
+    {
+      "operation": "ABS",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "SQUARE",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "CUBE",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "LN",
+      "target": 0,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "LOG10",
+      "target": 0,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "INVERSE",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "FACTORIAL",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "ABS",
+      "target": 3,
+      "expression": "home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 3,
+      "expression": "home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 3,
+      "expression": "home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 3,
+      "expression": "home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FACTORIAL",
+      "target": 6,
+      "expression": "home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS",
+      "target": 2,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SQUARE",
+      "target": 4,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 2,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 2,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 2,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FACTORIAL",
+      "target": 2,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS",
+      "target": 5,
+      "expression": "total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 5,
+      "expression": "total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 5,
+      "expression": "total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 5,
+      "expression": "total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS",
+      "target": 2,
+      "expression": "goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "NEGATIVE",
+      "target": 2,
+      "expression": "goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "SQUARE",
+      "target": 4,
+      "expression": "goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "ABS",
+      "target": 6,
+      "expression": "total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 6,
+      "expression": "total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 6,
+      "expression": "total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 6,
+      "expression": "total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS",
+      "target": 0,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "NEGATIVE",
+      "target": 0,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SQUARE",
+      "target": 0,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CUBE",
+      "target": 0,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 0,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 0,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 0,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SIN",
+      "target": 0,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "COS",
+      "target": 1,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT",
+      "target": 0,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FACTORIAL",
+      "target": 1,
+      "expression": "away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS",
+      "target": 3,
+      "expression": "goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "NEGATIVE",
+      "target": 3,
+      "expression": "goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT",
+      "target": 3,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT",
+      "target": 4,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT",
+      "target": 5,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "ABS",
+      "target": 4,
+      "expression": "goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "NEGATIVE",
+      "target": 4,
+      "expression": "goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT",
+      "target": 6,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_DIGITS",
+      "target": 4,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_DIGITS",
+      "target": 6,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "LOG10",
+      "target": 2,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "DIGIT_SUM",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_DIGITS",
+      "target": 1,
+      "expression": "match_index",
+      "matches": 1
+    },
+    {
+      "operation": "ABS",
+      "target": 5,
+      "expression": "goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "NEGATIVE",
+      "target": 5,
+      "expression": "goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 1,
+      "expression": "hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 2,
+      "expression": "hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 2,
+      "expression": "hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 1,
+      "expression": "hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 2,
+      "expression": "hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 2,
+      "expression": "hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 1,
+      "expression": "ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 2,
+      "expression": "ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 1,
+      "expression": "ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 2,
+      "expression": "total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 3,
+      "expression": "total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 3,
+      "expression": "total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 2,
+      "expression": "total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 3,
+      "expression": "total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 2,
+      "expression": "total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR",
+      "target": 0,
+      "expression": "difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL",
+      "target": 1,
+      "expression": "difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND",
+      "target": 0,
+      "expression": "difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ADD",
+      "target": 4,
+      "expression": "match_index ADD home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 2,
+      "expression": "match_index REVERSE_SUB home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MUL",
+      "target": 3,
+      "expression": "match_index MUL home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 3,
+      "expression": "match_index REVERSE_DIV home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "match_index MOD home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 0,
+      "expression": "match_index REVERSE_MOD home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_POWER",
+      "target": 3,
+      "expression": "match_index REVERSE_POWER home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "XOR",
+      "target": 2,
+      "expression": "match_index XOR home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "AND",
+      "target": 1,
+      "expression": "match_index AND home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "OR",
+      "target": 3,
+      "expression": "match_index OR home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_LEFT_A",
+      "target": 2,
+      "expression": "match_index SHIFT_LEFT_A home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_RIGHT_A",
+      "target": 0,
+      "expression": "match_index SHIFT_RIGHT_A home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_LEFT_B",
+      "target": 6,
+      "expression": "match_index SHIFT_LEFT_B home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 1,
+      "expression": "match_index SHIFT_RIGHT_B home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MEAN",
+      "target": 2,
+      "expression": "match_index MEAN home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 2,
+      "expression": "match_index ABS_DIFFERENCE home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 4,
+      "expression": "match_index FLOOR_SUM home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 4,
+      "expression": "match_index CEIL_SUM home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 4,
+      "expression": "match_index ROUND_SUM home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO home_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ADD",
+      "target": 3,
+      "expression": "match_index ADD away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 1,
+      "expression": "match_index REVERSE_SUB away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MUL",
+      "target": 2,
+      "expression": "match_index MUL away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 2,
+      "expression": "match_index REVERSE_DIV away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "match_index MOD away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_POWER",
+      "target": 2,
+      "expression": "match_index REVERSE_POWER away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "XOR",
+      "target": 3,
+      "expression": "match_index XOR away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "OR",
+      "target": 3,
+      "expression": "match_index OR away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_LEFT_B",
+      "target": 4,
+      "expression": "match_index SHIFT_LEFT_B away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 1,
+      "expression": "match_index SHIFT_RIGHT_B away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 3,
+      "expression": "match_index FLOOR_SUM away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 3,
+      "expression": "match_index CEIL_SUM away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 3,
+      "expression": "match_index ROUND_SUM away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ADD",
+      "target": 6,
+      "expression": "match_index ADD total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 4,
+      "expression": "match_index REVERSE_SUB total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MUL",
+      "target": 5,
+      "expression": "match_index MUL total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 5,
+      "expression": "match_index REVERSE_DIV total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_POWER",
+      "target": 5,
+      "expression": "match_index REVERSE_POWER total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "XOR",
+      "target": 4,
+      "expression": "match_index XOR total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "AND",
+      "target": 1,
+      "expression": "match_index AND total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "OR",
+      "target": 5,
+      "expression": "match_index OR total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 2,
+      "expression": "match_index SHIFT_RIGHT_B total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MEAN",
+      "target": 3,
+      "expression": "match_index MEAN total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 4,
+      "expression": "match_index ABS_DIFFERENCE total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 6,
+      "expression": "match_index FLOOR_SUM total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 6,
+      "expression": "match_index CEIL_SUM total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 6,
+      "expression": "match_index ROUND_SUM total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SUB",
+      "target": 3,
+      "expression": "match_index SUB goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 3,
+      "expression": "match_index ABS_DIFFERENCE goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 5,
+      "expression": "match_index REVERSE_SUB total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MUL",
+      "target": 6,
+      "expression": "match_index MUL total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 6,
+      "expression": "match_index REVERSE_DIV total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_POWER",
+      "target": 6,
+      "expression": "match_index REVERSE_POWER total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "AND",
+      "target": 0,
+      "expression": "match_index AND total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 3,
+      "expression": "match_index SHIFT_RIGHT_B total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 5,
+      "expression": "match_index ABS_DIFFERENCE total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ADD",
+      "target": 1,
+      "expression": "match_index ADD away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SUB",
+      "target": 1,
+      "expression": "match_index SUB away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MUL",
+      "target": 0,
+      "expression": "match_index MUL away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_DIV",
+      "target": 0,
+      "expression": "match_index REVERSE_DIV away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_POWER",
+      "target": 0,
+      "expression": "match_index REVERSE_POWER away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "XOR",
+      "target": 1,
+      "expression": "match_index XOR away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "OR",
+      "target": 1,
+      "expression": "match_index OR away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_LEFT_B",
+      "target": 0,
+      "expression": "match_index SHIFT_LEFT_B away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 0,
+      "expression": "match_index SHIFT_RIGHT_B away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "DISTANCE",
+      "target": 1,
+      "expression": "match_index DISTANCE away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 1,
+      "expression": "match_index FLOOR_SUM away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 1,
+      "expression": "match_index CEIL_SUM away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 1,
+      "expression": "match_index ROUND_SUM away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT_B",
+      "target": 0,
+      "expression": "match_index SQRT_B away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SUB",
+      "target": 4,
+      "expression": "match_index SUB goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 4,
+      "expression": "match_index ABS_DIFFERENCE goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 3,
+      "expression": "match_index SHIFT_RIGHT_B match_index",
+      "matches": 1
+    },
+    {
+      "operation": "MEAN",
+      "target": 4,
+      "expression": "match_index MEAN match_index",
+      "matches": 1
+    },
+    {
+      "operation": "MEAN",
+      "target": 5,
+      "expression": "match_index MEAN match_index",
+      "matches": 1
+    },
+    {
+      "operation": "MEAN",
+      "target": 6,
+      "expression": "match_index MEAN match_index",
+      "matches": 1
+    },
+    {
+      "operation": "SUB",
+      "target": 5,
+      "expression": "match_index SUB goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 5,
+      "expression": "match_index ABS_DIFFERENCE goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "SUB",
+      "target": 6,
+      "expression": "match_index SUB goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 6,
+      "expression": "match_index ABS_DIFFERENCE goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 2,
+      "expression": "match_index FLOOR_SUM hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 3,
+      "expression": "match_index CEIL_SUM hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 3,
+      "expression": "match_index ROUND_SUM hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO hg_mean",
+      "matches": 1
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "match_index MOD hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 2,
+      "expression": "match_index FLOOR_SUM hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 3,
+      "expression": "match_index CEIL_SUM hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 3,
+      "expression": "match_index ROUND_SUM hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO hg_variance",
+      "matches": 1
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 2,
+      "expression": "match_index FLOOR_SUM ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 3,
+      "expression": "match_index CEIL_SUM ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 2,
+      "expression": "match_index ROUND_SUM ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO ag_mean",
+      "matches": 1
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "match_index MOD total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 3,
+      "expression": "match_index FLOOR_SUM total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 4,
+      "expression": "match_index CEIL_SUM total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 4,
+      "expression": "match_index ROUND_SUM total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO total_mean",
+      "matches": 1
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "match_index MOD total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 3,
+      "expression": "match_index FLOOR_SUM total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 4,
+      "expression": "match_index CEIL_SUM total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 3,
+      "expression": "match_index ROUND_SUM total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO total_variance",
+      "matches": 1
+    },
+    {
+      "operation": "POWER",
+      "target": 1,
+      "expression": "match_index POWER difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 1,
+      "expression": "match_index FLOOR_SUM difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 2,
+      "expression": "match_index CEIL_SUM difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 1,
+      "expression": "match_index ROUND_SUM difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "SQRT_A",
+      "target": 1,
+      "expression": "match_index SQRT_A difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_A",
+      "target": 0,
+      "expression": "match_index LOG_A difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "LOG_RATIO",
+      "target": 0,
+      "expression": "match_index LOG_RATIO difference_mean",
+      "matches": 1
+    },
+    {
+      "operation": "ADD",
+      "target": 5,
+      "expression": "home_goals ADD away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SUB",
+      "target": 1,
+      "expression": "home_goals SUB away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MUL",
+      "target": 6,
+      "expression": "home_goals MUL away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MOD",
+      "target": 1,
+      "expression": "home_goals MOD away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 2,
+      "expression": "home_goals REVERSE_MOD away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "XOR",
+      "target": 1,
+      "expression": "home_goals XOR away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "AND",
+      "target": 2,
+      "expression": "home_goals AND away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_LEFT_B",
+      "target": 4,
+      "expression": "home_goals SHIFT_LEFT_B away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 1,
+      "expression": "home_goals SHIFT_RIGHT_B away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 1,
+      "expression": "home_goals ABS_DIFFERENCE away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 5,
+      "expression": "home_goals FLOOR_SUM away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 5,
+      "expression": "home_goals CEIL_SUM away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 5,
+      "expression": "home_goals ROUND_SUM away_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 2,
+      "expression": "home_goals REVERSE_SUB total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_MOD",
+      "target": 2,
+      "expression": "home_goals REVERSE_MOD total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "XOR",
+      "target": 6,
+      "expression": "home_goals XOR total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "AND",
+      "target": 1,
+      "expression": "home_goals AND total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "SHIFT_RIGHT_B",
+      "target": 2,
+      "expression": "home_goals SHIFT_RIGHT_B total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "MEAN",
+      "target": 4,
+      "expression": "home_goals MEAN total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 2,
+      "expression": "home_goals ABS_DIFFERENCE total_goals",
+      "matches": 1
+    },
+    {
+      "operation": "ADD",
+      "target": 1,
+      "expression": "home_goals ADD goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "SUB",
+      "target": 5,
+      "expression": "home_goals SUB goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "AND",
+      "target": 2,
+      "expression": "home_goals AND goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "ABS_DIFFERENCE",
+      "target": 5,
+      "expression": "home_goals ABS_DIFFERENCE goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "FLOOR_SUM",
+      "target": 1,
+      "expression": "home_goals FLOOR_SUM goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "CEIL_SUM",
+      "target": 1,
+      "expression": "home_goals CEIL_SUM goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "ROUND_SUM",
+      "target": 1,
+      "expression": "home_goals ROUND_SUM goal_difference",
+      "matches": 1
+    },
+    {
+      "operation": "REVERSE_SUB",
+      "target": 3,
+      "expression": "home_goals REVERSE_SUB total_goals",
+      "matches": 1
+    }
+  ]
+}
